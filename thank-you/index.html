@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="robots" content="noindex">
+<title>Thank you | Sylph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Prata&family=Jost:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&family=Jost:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&family=Jost:wght@400;500;600&display=swap"></noscript>
+<style>
+:root{--ink:#000;--paper:#fff;--stone:#67645f;--rule:#dedbd5;--mist:#f6f5f2;--cream:#faf6ef;--gold:#c69b3c;--gold-hi:#e9cd86;--emerald:#0d4c3c;--display:"Prata","Didot","Bodoni 72",Georgia,serif;--text:"Jost","Futura","Helvetica Neue",Arial,sans-serif;--ease:cubic-bezier(.2,.7,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--text);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.12;text-wrap:balance}
+p,li{text-wrap:pretty}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.mast{font-family:var(--display);letter-spacing:.42em;font-size:20px;text-decoration:none;color:var(--ink)}
+.mast img{height:26px;width:auto}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;min-height:100vh;min-height:100svh}
+.copy{padding:34px clamp(24px,5vw,72px) 48px;display:flex;flex-direction:column}
+.copy .top{display:flex;justify-content:space-between;align-items:center}
+.copy .top small{font-size:13px;color:var(--stone)}
+.pv{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:60;background:#111;color:#fff;font-size:12px;font-weight:600;letter-spacing:.04em;padding:10px 16px;border-radius:99px;box-shadow:0 8px 28px rgba(0,0,0,.28);white-space:nowrap}
+.copy .in{margin:auto 0;padding:48px 0 24px;max-width:560px}
+.kick{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#8a6a24}
+.kick:before{content:"";width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(198,155,60,.18)}
+h1{font-size:clamp(38px,4.6vw,60px);margin:18px 0 18px;letter-spacing:-.005em}
+.lede{font-size:18.5px;line-height:1.55;color:#2c2b29}
+.acts{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;margin-top:28px}
+.btn{position:relative;overflow:hidden;isolation:isolate;display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;font-size:15px;letter-spacing:.06em;text-transform:uppercase;padding:17px 26px;border-radius:2px;outline:2px solid rgba(198,155,60,0);animation:ring 2.8s cubic-bezier(.2,.7,.3,1) infinite}
+.btn.gold{background:linear-gradient(180deg,#f0d48d 0%,#d9b456 48%,#c69b3c 100%);color:#111;border:1.5px solid #111;box-shadow:0 4px 0 #111}
+.btn:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 34%,rgba(255,255,255,.55) 49%,transparent 64%);transform:translateX(-130%);animation:shine 3.8s var(--ease) infinite}
+.btn.dark:after{background:linear-gradient(105deg,transparent 34%,rgba(255,255,255,.18) 49%,transparent 64%)}
+@keyframes ring{0%{outline-offset:0;outline-color:rgba(198,155,60,.85)}75%,100%{outline-offset:12px;outline-color:rgba(198,155,60,0)}}
+@keyframes shine{0%,52%{transform:translateX(-130%)}82%,100%{transform:translateX(130%)}}
+.link{font-size:15.5px;color:var(--ink);text-underline-offset:4px;text-decoration-color:var(--rule)}
+.small{font-size:14px;color:var(--stone);margin-top:16px}
+.plate{position:relative;background:#111;overflow:hidden}
+.plate img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.plate.cover{display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,#2a2a2a,#0b0b0b)}
+.plate.cover img{position:relative;inset:auto;width:min(68%,420px);height:auto;box-shadow:0 34px 70px rgba(0,0,0,.6);transform:rotate(-2deg)}
+.plate .cap{position:absolute;left:0;right:0;bottom:0;padding:120px 32px 26px;color:#fff;font-family:var(--display);font-size:16px;background:linear-gradient(to top,rgba(0,0,0,.85),rgba(0,0,0,0))}
+.sec{padding:84px 0}
+.sec.mist{background:var(--mist)}
+.sec h2{font-size:clamp(30px,3.4vw,44px);margin-bottom:12px}
+.sec .intro{color:var(--stone);max-width:620px}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-top:36px;counter-reset:s}
+.steps li{background:#fff;border:1px solid var(--rule);border-top:3px solid var(--ink);padding:22px 22px 24px}
+.sec.mist .steps li{border-color:#e7e2d8;border-top-color:var(--ink)}
+.steps li:before{counter-increment:s;content:"0" counter(s);display:block;font-family:var(--display);font-size:26px;color:var(--gold);margin-bottom:10px}
+.steps b{display:block;font-weight:600;font-size:17px;margin-bottom:6px}
+.steps p{font-size:15.5px;color:#3b3a37;line-height:1.55}
+.guide{display:grid;grid-template-columns:.75fr 1.25fr;gap:56px;align-items:center}
+.guide .cv{position:relative}
+.guide .cv img{width:100%;box-shadow:0 30px 60px -20px rgba(0,0,0,.45);transform:rotate(-2deg)}
+.guide ul{list-style:none;margin:20px 0 4px}
+.guide li{position:relative;padding-left:26px;margin-bottom:8px}
+.guide li:before{content:"";position:absolute;left:2px;top:.55em;width:11px;height:6px;border-left:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(-45deg)}
+.covers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:34px}
+.covers figure{margin:0}
+.covers .ph{position:relative;aspect-ratio:4/5;overflow:hidden;background:#eee}
+.covers .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.covers figcaption{font-size:13.5px;color:var(--stone);margin-top:8px}
+.gstw{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+.gstf{display:grid;gap:14px;background:var(--mist);border:1px solid var(--rule);padding:26px}
+.gstf label{display:grid;gap:6px;font-size:14px;font-weight:500;color:#333}
+.gstf input,.gstf textarea{font:400 16px/1.4 var(--text);color:#111;border:1px solid #cfcac1;border-radius:2px;padding:12px 13px;background:#fff;width:100%;-webkit-appearance:none;appearance:none}
+.gstf input:focus,.gstf textarea:focus{outline:none;border-color:#111;box-shadow:0 0 0 3px rgba(198,155,60,.25)}
+.gstf .bad{border-color:#b3261e}
+.gstf .btn{justify-self:start;animation:none;border:0;cursor:pointer}
+.gmsg{font-size:14.5px;color:#0d4c3c}
+.gmsg.err{color:#b3261e}
+.gstf.done label,.gstf.done .btn{display:none}
+@media(max-width:900px){.gstw{grid-template-columns:1fr;gap:24px}.gstf{padding:20px}}
+.foot{border-top:1px solid var(--rule);padding:30px 0 40px;font-size:13.5px;color:var(--stone);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.foot a{color:var(--stone)}
+[hidden]{display:none!important}
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;min-height:0}
+  .plate{order:-1;height:42vh;min-height:280px}
+  .plate:before{content:"";position:absolute;left:0;right:0;top:0;height:96px;background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,0));z-index:1}
+  .plate.cover{height:46vh}
+  .plate.cover{padding-top:58px}
+  .plate.cover img{width:auto;height:80%}
+  .plate .cap{padding:70px 20px 16px;font-size:14px}
+  .copy{padding:0 20px 40px}
+  .copy .top{position:absolute;top:0;left:0;right:0;padding:18px 20px;z-index:3}
+  .copy .top .mast{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.5)}
+  .copy .top small{display:none}
+  .copy .in{padding:30px 0 0}
+  .lede{font-size:17px}
+  .sec{padding:60px 0}
+  .guide{grid-template-columns:1fr;gap:34px}
+  .guide .cv{max-width:260px;margin:0 auto}
+  .covers{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:380px){h1{font-size:34px}.btn{font-size:14px;padding:16px 20px}}
+@media(prefers-reduced-motion:reduce){*,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <div class="copy">
+      <div class="top"><a class="mast" href="../" data-logo>SYLPH</a><small data-top></small></div>
+      <div class="in">
+        <p class="kick" data-kick></p>
+        <h1 data-h1></h1>
+        <p class="lede" data-lede></p>
+        <div class="acts" data-acts></div>
+        <p class="small" data-small hidden></p>
+      </div>
+    </div>
+    <div class="plate" data-plate>
+      <img src="../assets/hero/brands-2.webp" srcset="../assets/hero/brands-2-s.webp 560w, ../assets/hero/brands-2-m.webp 820w, ../assets/hero/brands-2.webp 1080w" sizes="(max-width: 900px) 100vw, 48vw" alt="Progetto, from its Sylph feature" fetchpriority="high" decoding="async">
+      <p class="cap" data-cap>Progetto, from its Sylph cover story.</p>
+    </div>
+  </section>
+
+  <section class="sec gst" id="gst" data-gst-sec hidden>
+    <div class="wrap gstw">
+      <div>
+        <p class="kick">GST invoice</p>
+        <h2 style="margin-top:14px">Need a GST invoice?</h2>
+        <p class="intro" style="color:#3b3a37">Add your details and Sylph Creatives will share the GST invoice by email. Skip this if you do not need one.</p>
+      </div>
+      <form class="gstf" data-gst novalidate>
+        <label>Registered business name<input name="business" autocomplete="organization" required></label>
+        <label>GSTIN<input name="gstin" maxlength="15" autocapitalize="characters" placeholder="15 characters, for example 07ABCDE1234F1Z5" required></label>
+        <label>Billing address<textarea name="address" rows="2" autocomplete="street-address"></textarea></label>
+        <label>Email for the invoice<input name="email" type="email" autocomplete="email" required></label>
+        <button class="btn" type="submit">Share my GST details</button>
+        <p class="gmsg" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="sec mist" data-next-sec>
+    <div class="wrap">
+      <h2 data-next-h></h2>
+      <p class="intro" data-next-intro></p>
+      <ol class="steps" data-steps></ol>
+    </div>
+  </section>
+
+  <section class="sec" id="guide" data-guide-sec>
+    <div class="wrap guide">
+      <div class="cv"><img src="../assets/guide/cover-brands.webp" srcset="../assets/guide/cover-brands-s.webp 480w, ../assets/guide/cover-brands-m.webp 700w, ../assets/guide/cover-brands.webp 900w" sizes="(max-width: 900px) 260px, 380px" alt="The Brand Architects Remember, a free guide from Sylph" loading="lazy" decoding="async"></div>
+      <div>
+        <p class="kick">Free guide</p>
+        <h2 style="margin-top:14px" data-guide-h>The Brand Architects Remember</h2>
+        <p class="intro" style="color:#3b3a37">7 things editors look for before they feature a brand, and how to get yours remembered by the people who choose. Written for furniture, lighting and decor brands.</p>
+        <ul>
+          <li>The 7 things editors look for, with real examples from Sylph</li>
+          <li>A shot list, and the 5 mistakes that keep good work out</li>
+          <li>A one-page checklist and a 150-word worksheet</li>
+        </ul>
+        <div class="acts"><a class="btn gold" data-download href="#" download>Download the free guide <span aria-hidden="true">&darr;</span></a></div>
+        <p class="small">PDF, 16 pages. Free.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec mist">
+    <div class="wrap">
+      <h2>You are in good company</h2>
+      <p class="intro">Recent Sylph covers. Four editions a month, one cover each, hand-delivered to UHNI and HNI homes.</p>
+      <div class="covers"><figure><div class="ph"><img src="../assets/covers/sarita-handa-s.webp" srcset="../assets/covers/sarita-handa-s.webp 560w, ../assets/covers/sarita-handa-m.webp 820w" sizes="(max-width: 900px) 46vw, 260px" alt="Sarita Handa on the cover of Sylph" loading="lazy" decoding="async"></div><figcaption>Sarita Handa</figcaption></figure><figure><div class="ph"><img src="../assets/covers/kathgodown-s.webp" srcset="../assets/covers/kathgodown-s.webp 560w, ../assets/covers/kathgodown-m.webp 820w" sizes="(max-width: 900px) 46vw, 260px" alt="Kathgodown on the cover of Sylph" loading="lazy" decoding="async"></div><figcaption>Kathgodown</figcaption></figure><figure><div class="ph"><img src="../assets/covers/progetto-s.webp" srcset="../assets/covers/progetto-s.webp 560w, ../assets/covers/progetto-m.webp 820w" sizes="(max-width: 900px) 46vw, 260px" alt="Progetto on the cover of Sylph" loading="lazy" decoding="async"></div><figcaption>Progetto</figcaption></figure><figure><div class="ph"><img src="../assets/covers/lumiere-s.webp" srcset="../assets/covers/lumiere-s.webp 560w, ../assets/covers/lumiere-m.webp 820w" sizes="(max-width: 900px) 46vw, 260px" alt="Lumiere by Imperial on the cover of Sylph" loading="lazy" decoding="async"></div><figcaption>Lumiere by Imperial</figcaption></figure></div>
+    </div>
+  </section>
+
+  <div class="wrap foot"><span>&copy; 2026 Sylph. For the 1%.</span><span data-contact hidden>Questions? <a data-mail href="#"></a></span></div>
+</main>
+
+<script>
+/* ============================================================
+   SETTINGS FOR THE TEAM. Fill these in; nothing else needs editing.
+   ============================================================ */
+const CONFIG = {
+  // The same Google Apps Script web app URL as the eligibility flow (lead sheet script v3). Marks payments, bookings,
+  // downloads and GST details on the buyer's row.
+  leadEndpoint: '',
+  // Meta pixel ID. "Purchase" fires here once per payment when the page opens with ?status=paid.
+  metaPixelId: '',
+  // The free guide (PDF) that downloads from this page.
+  guideUrl: '../guide/Sylph_The_Brand_Architects_Remember.pdf',
+  // The eligibility check, for buyers who come back when they are ready.
+  formUrl: '../eligibility/',
+  // The form where paying clients send photos and project notes (Dinesh). Empty: the page says Sylph's team will ask for them.
+  projectFormUrl: '',
+  // Sylph's public email for questions. Empty hides the line.
+  contactEmail: '',
+  // Logo file. Empty shows the SYLPH wordmark.
+  logo: '',
+  // Online prices, used for the Purchase value. Keep in line with the eligibility flow.
+  prices: { feature: 32000, half: 22000, quarter: 10800 },
+  names: { feature: 'The Feature', half: 'Half page', quarter: 'Quarter page' }
+};
+const PAGE = {"type": "brand", "name": "ty-brands", "guideTitle": "The Brand Architects Remember", "guideSub": "7 things editors look for before they feature a brand, and how to get yours remembered by the people who choose.", "guideCover": "guide/cover-brands", "a": {"send": "Photos of your pieces, ideally in real rooms, and a few lines about the collection and your brand.", "prep": "Five to ten photographs of your pieces, ideally in finished rooms.", "work": "collection", "firm": "brand", "guideFit": "Written for furniture, lighting and decor brands."}};
+(function () {
+  const $ = (s, el) => (el || document).querySelector(s);
+  const esc = s => String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const q = new URLSearchParams(location.search);
+  const S = ['paid', 'call', 'guide', 'other'];
+  const status = S.indexOf(q.get('status')) > -1 ? q.get('status') : 'other';
+  // ?preview=1 is the team's test mode: a banner shows, and nothing is sent to the sheet, Meta or Tag Manager
+  const preview = q.get('preview') === '1';
+  const pkg = CONFIG.prices[q.get('pkg')] ? q.get('pkg') : 'feature';
+  let flow = null;
+  try { flow = JSON.parse(localStorage.getItem('sylph_flow')); } catch (e) {}
+  const first = flow && flow.contact && flow.contact.name ? String(flow.contact.name).trim().split(/\s+/)[0] : '';
+  const nm = first ? ', ' + esc(first.charAt(0).toUpperCase() + first.slice(1)) : '';
+  const check = CONFIG.formUrl + (CONFIG.formUrl.indexOf('?') > -1 ? '&' : '?') + 'type=' + PAGE.type + '&page=' + PAGE.name;
+  const A = PAGE.a;
+
+  const C = {
+    paid: {
+      top: 'Payment received', kick: 'Payment received',
+      h1: 'You\u2019re in' + nm + '. Your feature is booked.',
+      lede: 'Thank you. Your place in the next edition with room is reserved, at the fixed price you saw. Your payment receipt comes to your email from Razorpay.',
+      acts: (CONFIG.projectFormUrl ? '<a class="btn" href="' + esc(CONFIG.projectFormUrl) + '">Send your ' + A.work + ' details <span aria-hidden="true">&rarr;</span></a>' : '<a class="btn" href="#guide">Get your photographs right <span aria-hidden="true">&darr;</span></a>') + '<a class="link" href="#gst">Need a GST invoice?</a>',
+      small: CONFIG.projectFormUrl ? '' : 'Sylph\u2019s team will write to you on email and WhatsApp to collect your ' + A.work + ' details.',
+      nextH: 'What happens next', nextIntro: 'Four simple steps from here to the coffee table.',
+      steps: [['Your receipt', 'Razorpay emails it now. Need a GST invoice? Add your details above and it is shared with you.'], ['Send your ' + A.work, A.send], ['Our editors write it', 'Sylph\u2019s editors write your story. You do not write a word.'], ['It is published', 'In the next edition with room. Send your material by the middle of a month and it usually runs the month after, in UHNI and HNI homes. Every page you book is published. Guaranteed. Then it is yours to show in every client meeting and proposal: \u201cAs featured in Sylph\u201d.']]
+    },
+    call: {
+      top: 'Call booked', kick: 'Call booked',
+      h1: 'Your call is booked' + nm + '.',
+      lede: 'You will get a confirmation on email and WhatsApp. On the call, Sylph’s team will walk you through the placement that fits your ' + A.firm + ', what it can do for you, and the edition calendar.',
+      acts: '<a class="btn" href="#guide">Read the guide before your call <span aria-hidden="true">&darr;</span></a>',
+      nextH: 'Before your call', nextIntro: 'Three things that make the call more useful. Ten minutes, at most.',
+      steps: [['Keep photographs handy', A.prep], ['Know your timing', 'Which edition you would like to appear in, or the date your ' + A.work + ' launches.'], ['Bring your questions', 'About placements, a cover or the year-long programme. Prices are fixed, so the call is about the plan, not the price.'], ['After the call', 'If you go ahead, Sylph’s team sends your booking details and the next steps in writing.']]
+    },
+    guide: {
+      top: 'Your free guide', kick: 'Your free guide',
+      h1: 'Here is your guide' + nm + '.',
+      lede: esc(PAGE.guideTitle) + ': ' + esc(PAGE.guideSub) + ' We will also write to you as the next editions fill.',
+      acts: '<a class="btn gold" data-download href="#" download>Download the free guide <span aria-hidden="true">&darr;</span></a>',
+      small: 'PDF, 16 pages. ' + A.guideFit,
+      nextH: 'How to use it', nextIntro: 'An afternoon with the guide, and your project is ready for an editor.',
+      steps: [['Read Part One', 'The 7 things editors look for. About fifteen minutes.'], ['Run the checklist', 'On your best finished ' + A.work + '. It shows you exactly what to fix.'], ['Fill in the worksheet', 'Your ' + A.work + ' in 150 words. It is everything an editor needs from you.'], ['Take the check again', 'When it is ready, the two-minute check shows where it fits, and its fixed price.']],
+      stepsCta: true
+    },
+    other: {
+      top: 'Thank you', kick: 'Thank you',
+      h1: 'Thank you' + nm + '.',
+      lede: 'Sylph features architects, interior designers, home brands and developers. Our team will read your details and write to you if there is a fit.',
+      acts: '<a class="btn" href="#guide">Read the free guide <span aria-hidden="true">&darr;</span></a>'
+    }
+  }[status];
+
+  document.title = C.top + ' | Sylph';
+  if (preview) document.body.insertAdjacentHTML('beforeend', '<div class="pv" role="status">Preview for the team. Nothing here is recorded.</div>');
+  $('[data-top]').textContent = C.top;
+  $('[data-kick]').textContent = C.kick;
+  $('[data-h1]').innerHTML = C.h1;
+  $('[data-lede]').innerHTML = C.lede;
+  $('[data-acts]').innerHTML = C.acts;
+  if (C.small) { const s = $('[data-small]'); s.innerHTML = C.small; s.hidden = false; }
+  if (C.steps) {
+    $('[data-next-h]').textContent = C.nextH;
+    $('[data-next-intro]').textContent = C.nextIntro;
+    $('[data-steps]').innerHTML = C.steps.map(s => '<li><b>' + s[0] + '</b><p>' + s[1] + '</p></li>').join('');
+    if (C.stepsCta) $('[data-steps]').insertAdjacentHTML('afterend', '<div class="acts" style="margin-top:30px"><a class="btn" href="' + esc(check) + '">Take the two-minute check <span aria-hidden="true">&rarr;</span></a></div>');
+  } else $('[data-next-sec]').hidden = true;
+  if (status === 'guide') {
+    // The guide is the hero here: show its cover on the image side, and drop the repeat block below
+    const plate = $('[data-plate]');
+    plate.classList.add('cover');
+    const gc = '../assets/' + PAGE.guideCover;
+    plate.innerHTML = '<img src="' + gc + '.webp" srcset="' + gc + '-s.webp 480w, ' + gc + '-m.webp 700w, ' + gc + '.webp 900w" sizes="(max-width: 900px) 60vw, 420px" alt="' + esc(PAGE.guideTitle) + ', a free guide from Sylph" fetchpriority="high">';
+    $('[data-guide-sec]').hidden = true;
+  }
+  document.querySelectorAll('[data-download]').forEach(a => {
+    a.href = CONFIG.guideUrl;
+    a.addEventListener('click', () => { send('guide_download'); track('guide_download'); });
+  });
+  /* GST details, after payment only. Optional, one short form, no extra step before paying */
+  if (status === 'paid') {
+    const sec = $('[data-gst-sec]'); sec.hidden = false;
+    const f = $('[data-gst]'), msg = $('.gmsg', f);
+    if (flow && flow.contact && flow.contact.email) f.elements.email.value = flow.contact.email;
+    if (flow && flow.firm && flow.firm.name) f.elements.business.value = flow.firm.name;
+    f.elements.gstin.addEventListener('input', () => { const v = f.elements.gstin; const p = v.selectionStart; v.value = v.value.toUpperCase().replace(/\s/g, ''); try { v.setSelectionRange(p, p); } catch (e) {} });
+    f.addEventListener('submit', e => {
+      e.preventDefault();
+      const g = f.elements.gstin.value.trim().toUpperCase(), b = f.elements.business.value.trim(), m = f.elements.email.value.trim();
+      const okG = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/.test(g), okB = !!b, okM = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m);
+      f.elements.gstin.classList.toggle('bad', !okG); f.elements.business.classList.toggle('bad', !okB); f.elements.email.classList.toggle('bad', !okM);
+      if (!okG || !okB || !okM) { msg.className = 'gmsg err'; msg.textContent = !okG ? 'Please check the GSTIN. It has 15 characters, for example 07ABCDE1234F1Z5.' : 'Please add your business name and email.'; return; }
+      send('gst_details', { gstin: g, gst_business: b, gst_address: f.elements.address.value.trim(), gst_email: m });
+      track('gst_details', { type: PAGE.type });
+      f.classList.add('done'); msg.className = 'gmsg'; msg.textContent = 'Thank you. Your GST invoice will be shared with ' + m + '.';
+    });
+  }
+
+  if (CONFIG.logo) document.querySelectorAll('[data-logo]').forEach(l => { l.innerHTML = '<img src="' + esc(CONFIG.logo) + '" alt="Sylph">'; });
+  if (CONFIG.contactEmail) { const c = $('[data-contact]'); const m = $('[data-mail]'); m.href = 'mailto:' + CONFIG.contactEmail; m.textContent = CONFIG.contactEmail; c.hidden = false; }
+
+  /* Tracking: the sheet, Meta and Tag Manager */
+  function send(event, extra) {
+    const body = Object.assign({ lead_id: (flow && flow.id) || '', event: event, status: status, package: status === 'paid' ? pkg : '', page: PAGE.name, at: new Date().toISOString(), utm_source: q.get('utm_source') || '', utm_campaign: q.get('utm_campaign') || '', utm_content: q.get('utm_content') || '' }, extra || {});
+    if (preview || !CONFIG.leadEndpoint) { if (window.console) console.log('[Sylph thank-you]', body); return; }
+    try { fetch(CONFIG.leadEndpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body), keepalive: true }); } catch (e) {}
+  }
+  function track(name, data) {
+    if (preview) return;
+    try {
+      if (window.fbq) window.fbq('trackCustom', 'Sylph_' + name, data || {});
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(Object.assign({ event: 'sylph_' + name }, data || {}));
+    } catch (e) {}
+  }
+  if (CONFIG.metaPixelId && !window.fbq && !preview) {
+    !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s); }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    window.fbq('init', CONFIG.metaPixelId);
+    window.fbq('track', 'PageView');
+  }
+  let once = false;
+  if (!preview) try { once = sessionStorage.getItem('sylph_ty_' + status + '_' + pkg) === '1'; sessionStorage.setItem('sylph_ty_' + status + '_' + pkg, '1'); } catch (e) {}
+  if (!once && !preview) {
+    send('thankyou_' + status);
+    track('thankyou_' + status, { type: PAGE.type });
+    if (status === 'paid' && !preview) {
+      try {
+        if (window.fbq) window.fbq('track', 'Purchase', { value: CONFIG.prices[pkg], currency: 'INR', content_name: CONFIG.names[pkg] });
+        window.dataLayer.push({ event: 'purchase', ecommerce: { currency: 'INR', value: CONFIG.prices[pkg], items: [{ item_name: CONFIG.names[pkg] }] } });
+      } catch (e) {}
+    }
+  }
+})();
+</script>
+</body>
+</html>

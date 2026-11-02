@@ -1,0 +1,6 @@
+# Netlify redirects for the Sylph Brands site
+# Short link to the free guide, for emails and WhatsApp: sylph-brands.netlify.app/guide
+/guide    /guide/Sylph_The_Brand_Architects_Remember.pdf    302
+# Older links (and earlier guide PDFs) used /check: send them to the form
+/check      /eligibility/          301
+/check/*    /eligibility/:splat    301

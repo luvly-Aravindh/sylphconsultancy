@@ -1,0 +1,1160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Get featured in Sylph</title>
+<meta name="theme-color" content="#000000">
+<meta name="description" content="A few short questions to see which Sylph placement fits your work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Jost:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #000000;
+    --paper: #FFFFFF;
+    --stone: #67645F;
+    --rule: #DEDBD5;
+    --mist: #F6F5F2;
+    --champagne: #C69B3C;
+    --oxblood: #6E1423;
+    --emerald: #0D4C3C;
+    --plum: #4A154B;
+    --sapphire: #0B1B3A;
+    --display: "Prata", "Didot", "Bodoni 72", Georgia, serif;
+    --text: "Jost", "Futura", "Helvetica Neue", Arial, sans-serif;
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--text);
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  button, input { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+  /* Spread: left page carries the question, right page carries the plate */
+  .spread {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: 100vh;
+  }
+  .page {
+    display: flex;
+    flex-direction: column;
+    padding: 40px clamp(28px, 6vw, 96px) 32px;
+    min-height: 100vh;
+  }
+  .masthead {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: .32em;
+  }
+  .masthead img { height: 28px; display: block; }
+  .stage { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 48px 0 32px; max-width: 560px; }
+  .screen { display: none; }
+  .screen.on { display: block; animation: turn .5s var(--ease); }
+  @keyframes turn { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
+
+  h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(30px, 3vw, 42px);
+    line-height: 1.14;
+    letter-spacing: -.005em;
+    margin-bottom: 14px;
+  }
+  h1:focus { outline: none; }
+  .lede { color: var(--stone); max-width: 46ch; margin-bottom: 30px; }
+  .intro h1 { font-size: clamp(38px, 4.1vw, 58px); line-height: 1.08; }
+  .intro .lede { font-size: 19px; color: var(--ink); }
+  .intro .small { color: var(--stone); font-size: 15px; margin-top: 18px; }
+
+  /* Options: a list of choices, like an index */
+  .options { list-style: none; border-top: 1px solid var(--rule); }
+  .opt {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 16px;
+    align-items: start;
+    text-align: left;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    padding: 15px 4px;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  @media (hover: hover) { .opt:hover { background: var(--mist); } }
+  .mark {
+    width: 18px; height: 18px; margin-top: 4px;
+    border: 1px solid var(--ink);
+    border-radius: 50%;
+    display: grid; place-items: center;
+  }
+  .multi .mark { border-radius: 2px; }
+  .opt[aria-checked="true"] .mark { background: var(--ink); box-shadow: 0 0 0 3px var(--paper), 0 0 0 4px var(--champagne); }
+  .opt[aria-checked="true"] .mark::after { content: ""; width: 6px; height: 6px; background: var(--paper); border-radius: 50%; }
+  .multi .opt[aria-checked="true"] .mark::after { border-radius: 0; width: 8px; height: 4px; background: none; border-left: 1.5px solid var(--paper); border-bottom: 1.5px solid var(--paper); transform: rotate(-45deg) translate(1px,-1px); }
+  .opt b { display: block; font-weight: 500; }
+  .opt small { display: block; color: var(--stone); font-size: 14.5px; margin-top: 2px; }
+
+  /* Fields */
+  .field { margin-bottom: 22px; }
+  .field label { display: block; font-size: 14.5px; color: var(--stone); margin-bottom: 6px; }
+  .field input {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--ink);
+    padding: 8px 0 10px;
+    font-family: var(--display);
+    font-size: 22px;
+    background: transparent;
+    border-radius: 0;
+  }
+  .field input:focus-visible { outline: none; border-bottom: 2px solid var(--ink); padding-bottom: 9px; }
+  .field .err { display: none; color: var(--oxblood); font-size: 14px; margin-top: 6px; }
+  .field.bad .err { display: block; }
+  .field.bad input { border-bottom-color: var(--oxblood); }
+  .note { font-size: 14px; color: var(--stone); margin-top: 6px; }
+
+  /* Controls and folio */
+  .controls { display: flex; align-items: center; gap: 22px; margin-top: 30px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--ink); color: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 15px 30px;
+    font-size: 16px; letter-spacing: .02em;
+    cursor: pointer; text-decoration: none;
+    transition: background .2s, color .2s;
+  }
+  @media (hover: hover) { .btn:hover { background: var(--paper); color: var(--ink); } .btn.quiet:hover { background: var(--ink); color: var(--paper); } }
+  .btn[disabled] { opacity: .35; cursor: not-allowed; }
+  .btn[disabled], .btn[disabled]:hover { background: var(--ink); color: var(--paper); }
+  .btn.quiet { background: var(--paper); color: var(--ink); }
+  .link { background: none; border: 0; padding: 0; color: var(--ink); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--rule); cursor: pointer; font-size: 16px; }
+  .link:hover { text-decoration-color: var(--ink); }
+  .back { color: var(--stone); }
+  .hint { font-size: 13.5px; color: var(--stone); margin-left: auto; }
+  .folio { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--text); font-size: 13.5px; letter-spacing: .02em; color: var(--stone); }
+  .folio .bar { flex: 1; height: 1px; background: var(--rule); margin: 0 16px; position: relative; top: -4px; }
+  .folio .bar i { position: absolute; left: 0; top: 0; height: 1px; background: var(--ink); transition: width .5s var(--ease); }
+
+  /* Plate: the right page */
+  .plate-page { background: var(--ink); padding: 0; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  .plate { flex: 1; position: relative; overflow: hidden; background: var(--ink); }
+  .plate > * { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .6s var(--ease); }
+  .plate svg { display: block; }
+  .plate > img { object-position: center 28%; background: var(--ink); }
+  .caption { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 170px clamp(28px, 4vw, 56px) 34px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; color: var(--paper); background: linear-gradient(to top, rgba(0,0,0,.94) 0%, rgba(0,0,0,.82) 38%, rgba(0,0,0,.4) 70%, rgba(0,0,0,0)); pointer-events: none; }
+  .caption p { font-family: var(--display); font-size: 19px; line-height: 1.4; max-width: 40ch; }
+  .caption span { font-size: 13px; color: rgba(255,255,255,.7); white-space: nowrap; }
+
+  /* Result */
+  .pkg { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--rule); padding: 22px 0; margin: 6px 0 22px; }
+  .pkg .row { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; }
+  .pkg h2 { font-family: var(--display); font-weight: 400; font-size: 30px; line-height: 1.1; }
+  .price { font-family: var(--display); font-size: 30px; white-space: nowrap; }
+  .price small { display: block; text-align: right; font-family: var(--text); font-size: 13px; color: var(--stone); }
+  .pkg ul { list-style: none; margin-top: 14px; }
+  .pkg .does { margin-top: 14px; font-size: 16px; line-height: 1.55; text-wrap: pretty; }
+  .pkg .does span { display: block; font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--champagne); margin-bottom: 4px; }
+  .pkg li { padding-left: 18px; position: relative; margin-bottom: 4px; }
+  .pkg li::before { content: ""; position: absolute; left: 0; top: .72em; width: 8px; height: 1px; background: var(--champagne); }
+  .also { font-size: 15.5px; color: var(--stone); margin-bottom: 22px; }
+  .also button { font-size: 15.5px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; }
+  .after { display: none; margin-top: 22px; padding: 18px 20px; background: var(--mist); border-left: 2px solid var(--champagne); font-size: 15.5px; }
+  .after.on { display: block; }
+  .after p + p { margin-top: 8px; }
+  .gstline { margin-top: 16px; font-size: 14.5px; color: var(--stone); max-width: 46ch; }
+
+  /* Upload */
+  .upload .ulabel { display: block; font-size: 14.5px; color: var(--stone); margin-bottom: 8px; }
+  .ubtn { display: inline-block; border: 1px solid var(--ink); padding: 10px 18px; font-size: 15px; cursor: pointer; }
+  .upload input:focus-visible + .note, .ubtn:focus-within { outline: 2px solid var(--ink); }
+
+  /* Personal preview on the plate */
+  .plate > .pv { inset: auto; width: auto; height: auto; left: 50%; top: 45%; transform: translate(-50%, -50%) scale(.97); opacity: 0; transition: opacity .7s var(--ease), transform .9s var(--ease); container-type: inline-size; box-shadow: 0 30px 70px rgba(0,0,0,.55); }
+  .plate > .pv.on { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  .plate > .pv img, .pv svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .plate > .pv.cover { height: 74%; aspect-ratio: .77; overflow: hidden; color: #fff; background: #111; }
+  .cv-bg { position: absolute; inset: 0; }
+  .cv-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,0) 30%, rgba(0,0,0,0) 50%, rgba(0,0,0,.72)); }
+  .cv-mast { position: absolute; top: 5cqw; left: 0; right: 0; text-align: center; font-family: var(--display); font-size: 19cqw; letter-spacing: .14em; padding-left: .14em; line-height: 1; }
+  .cv-ed { position: absolute; top: 27cqw; right: 7cqw; font-size: 2.7cqw; letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
+  .cv-lines { position: absolute; top: 38cqw; left: 7cqw; width: 46%; }
+  .cv-lines p { font-family: var(--display); font-size: 4.2cqw; line-height: 1.2; margin-bottom: 4cqw; padding-top: 2cqw; border-top: 1px solid var(--champagne); }
+  .cv-star { position: absolute; left: 7cqw; right: 7cqw; bottom: 7cqw; }
+  .cv-star h3 { font-family: var(--display); font-weight: 400; font-size: 10.5cqw; line-height: 1.02; overflow-wrap: anywhere; }
+  .cv-star p { font-size: 3.3cqw; margin-top: 2.4cqw; opacity: .9; }
+  .plate > .pv.fspread { width: 86%; aspect-ratio: 1.54; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 100%; background: var(--paper); color: var(--ink); }
+  .sp-l > img, .sp-l > svg { position: absolute; inset: 0; }
+  .sp-l { position: relative; overflow: hidden; }
+  .sp-l span { position: absolute; left: 2cqw; bottom: 1.6cqw; color: #fff; font-size: 1.25cqw; letter-spacing: .04em; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+  .sp-r { padding: 4.5cqw 4cqw 3cqw; display: flex; flex-direction: column; }
+  .sp-k { font-size: 1.15cqw; letter-spacing: .16em; text-transform: uppercase; color: var(--stone); padding-bottom: 1.2cqw; border-bottom: 1px solid var(--ink); }
+  .sp-r h3 { font-family: var(--display); font-weight: 400; font-size: 4.4cqw; line-height: 1.05; margin: 3cqw 0 1.4cqw; overflow-wrap: anywhere; }
+  .sp-dek { font-size: 1.5cqw; line-height: 1.4; color: #333; }
+  .sp-by { font-size: 1.1cqw; color: var(--stone); margin: 1.4cqw 0 2cqw; letter-spacing: .04em; }
+  .sp-txt { flex: 1; }
+  .sp-txt b { float: left; font-family: var(--display); font-weight: 400; font-size: 5.4cqw; line-height: .8; margin: .3cqw 1cqw 0 0; color: var(--champagne); }
+  .sp-txt i { display: block; height: .55cqw; background: var(--rule); margin-bottom: 1.05cqw; }
+  .sp-fo { display: flex; justify-content: space-between; font-size: 1cqw; color: var(--stone); letter-spacing: .08em; }
+  .plate > .pv.year { width: 88%; box-shadow: none; color: #fff; }
+  .pv.year h4 { font-family: var(--display); font-weight: 400; font-size: 4.6cqw; margin-bottom: 3cqw; text-align: center; }
+  .yr-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.4cqw; }
+  .mini { position: relative; aspect-ratio: .77; overflow: hidden; box-shadow: 0 16px 34px rgba(0,0,0,.5); background: #111; }
+  .mini::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.4), rgba(0,0,0,0) 35%, rgba(0,0,0,.6)); }
+  .mini span { position: absolute; z-index: 1; top: 1.6cqw; left: 0; right: 0; text-align: center; font-family: var(--display); font-size: 3.2cqw; letter-spacing: .14em; }
+  .mini b { position: absolute; z-index: 1; left: 1.4cqw; right: 1.4cqw; bottom: 1.6cqw; font-family: var(--display); font-weight: 400; font-size: 2.1cqw; line-height: 1.1; }
+  .yr p { font-size: 1.9cqw; margin-top: 1.6cqw; line-height: 1.35; }
+  .yr p em { display: block; font-style: normal; color: var(--champagne); letter-spacing: .1em; text-transform: uppercase; font-size: 1.5cqw; }
+
+  /* Preview of the buyer's page, shown on the plate at the end */
+  .proof { position: absolute; inset: 7% 10% 19% 10%; width: auto !important; height: auto !important; background: var(--paper); color: var(--ink); padding: 6% 7%; display: flex; flex-direction: column; opacity: 0; box-shadow: 0 30px 60px rgba(0,0,0,.45); }
+  .proof.on { opacity: 1; }
+  body.done .caption { background: none; padding-top: 24px; }
+  .proof .mh { font-family: var(--display); letter-spacing: .32em; font-size: 15px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--ink); padding-bottom: 10px; }
+  .proof .mh em { letter-spacing: .02em; font-family: var(--text); font-style: normal; font-size: 12.5px; color: var(--stone); }
+  .proof .hed { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 3.8vw, 64px); line-height: 1.04; letter-spacing: -.01em; margin: 9% 0 16px; overflow-wrap: anywhere; }
+  .proof .dek { font-family: var(--text); font-size: 15px; letter-spacing: .04em; color: var(--stone); }
+  .proof .pic { flex: 1; margin-top: 7%; min-height: 80px; background: var(--emerald); position: relative; overflow: hidden; }
+  .proof .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .proof .pic svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .proof .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 16px; }
+  .proof .cols i { display: block; height: 6px; background: var(--rule); margin-bottom: 7px; }
+
+  @media (max-width: 900px) {
+    .spread { grid-template-columns: 1fr; }
+    .plate-page { order: -1; position: relative; height: calc(38vh + 56px); min-height: 300px; padding: 56px 0 0; background: var(--paper); }
+    .caption { padding: 40px 20px 14px; }
+    .caption span { color: rgba(255,255,255,.75); }
+    .caption p { font-size: 15px; }
+    .page { min-height: 0; padding: 22px 20px 28px; }
+    .masthead.top { position: absolute; top: 17px; left: 20px; z-index: 3; color: var(--ink); font-size: 18px; }
+    body.done .plate-page { height: auto; min-height: 0; }
+    body.done .plate { flex: none; height: 46vh; min-height: 300px; }
+    body.done .caption { position: static; background: none; color: rgba(255,255,255,.78); padding: 10px 20px 14px; }
+    body.done .caption p { font-size: 14px; }
+    .proof { inset: 0; padding: 7% 8%; box-shadow: none; }
+    .proof .hed { margin: 7% 0 8px; }
+    .proof .cols { display: none; }
+    .page > .masthead { display: none; }
+    .stage { padding: 26px 0 16px; justify-content: flex-start; }
+    .controls { position: sticky; bottom: 0; background: var(--paper); padding: 14px 0; margin-top: 18px; border-top: 1px solid var(--rule); }
+    .hint { display: none; }
+    .proof .hed { font-size: 34px; }
+    .proof .dek { font-size: 16px; }
+    .plate .cover-mast { display: none; }
+    body.done .plate-page { background: var(--ink); }
+    .plate > .pv.cover { height: 88%; }
+    .plate > .pv.fspread, .plate > .pv.year { width: 94%; }
+  }
+  @media (min-width: 901px) { .masthead.top { display: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .screen.on { animation: none; }
+    .plate > *, .folio .bar i { transition: none; }
+  }
+  @media (max-width: 420px) { .pkg h2, .price { font-size: 25px; } .pkg .row { gap: 12px; } }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</head>
+<body>
+<main class="spread">
+  <section class="page" aria-live="polite">
+    <div class="masthead" id="mast">SYLPH</div>
+    <div class="stage" id="stage"></div>
+    <div class="folio" aria-hidden="true"><span id="folioL"></span><span class="bar"><i id="bar"></i></span><span>Sylph</span></div>
+  </section>
+  <aside class="plate-page" aria-label="Image">
+    <div class="masthead top">SYLPH</div>
+    <div class="plate" id="plate"></div>
+    <div class="caption"><p id="cap"></p><span id="folioR"></span></div>
+  </aside>
+</main>
+
+<script>
+/* ============================================================
+   SETTINGS FOR THE TEAM. Fill these in; nothing else needs editing.
+   ============================================================ */
+const CONFIG = {
+  // Google Apps Script web app URL that writes every step to the lead sheet (Dinesh).
+  leadEndpoint: '',
+  // This copy of the form serves one buyer group: 'architect', 'brand' or 'developer'. The "which best describes you"
+  // question is skipped and every buyer goes to this group's thank-you page. Empty asks the question as before.
+  lockType: 'brand',
+  // Calendar link for editorial calls (TidyCal or Calendly). Name, email and phone are added to the link.
+  // Only bigger placements see it. Set the calendar's after-booking redirect to the thank-you page with ?status=call.
+  calendarUrl: '',
+  // Razorpay payment page links, one per online package (Aravindh). The buyer goes straight there in the same tab.
+  // Set each link's success redirect to the thank-you page with ?status=paid&pkg=feature (or half, quarter).
+  // GST invoices are handled after payment, on the thank-you page. Nothing extra before paying.
+  razorpay: { feature: '', half: '', quarter: '' },
+  // The free guide now opens on the thank-you page (status=guide). This setting is no longer needed here.
+  guideUrl: '',
+  // Privacy policy page on Sylph's website. Shown under the contact fields once set.
+  privacyUrl: '',
+  // Logo file (leave empty to show the SYLPH wordmark).
+  logo: '',
+  // How prices are labelled until Prerna confirms (question B11).
+  gstNote: 'GST as applicable',
+  // Sylph's real covers and feature pages for the image panel (right on a laptop, top on a phone).
+  // Files live in the 'assets' folder shared with the landing pages. Each name has three sizes: name-s.webp, name-m.webp, name.webp.
+  assets: '../assets/',
+  gallery: {
+    covers:     ['covers/sarita-handa', 'covers/kathgodown', 'covers/progetto', 'covers/lumiere', 'covers/triveni', 'covers/mia-cara', 'covers/dvinity', 'covers/jb-marble', 'table/stack', 'covers/outdoor-connections'],
+    architects: [],
+    brands:     ['covers/sarita-handa', 'brands/sarita-handa-bed', 'covers/kathgodown', 'covers/progetto', 'brands/lumiere-founders', 'brands/progetto-chairs', 'covers/triveni', 'brands/mia-cara-table', 'brands/jb-fireplace', 'covers/dvinity', 'brands/argmac-foosball', 'covers/mia-cara', 'brands/lumiere-lights'],
+    developers: []
+  },
+  // Clean photographs (no magazine text) used for the buyer's own cover or feature preview at the end.
+  hero: {
+    architect: [],
+    brand:     ['hero/brands-1', 'hero/brands-2', 'hero/brands-3'],
+    developer: []
+  },
+  // Thank-you pages, one per buyer group. The flow sends buyers there after a guide request; payments and call
+  // bookings arrive through the Razorpay and calendar redirects.
+  // Set Razorpay's success redirect to the same page with ?status=paid&pkg=feature (or half, quarter),
+  // and the calendar's after-booking redirect to ?status=call.
+  thankYou: {
+    architect: '../thank-you/',
+    brand:     '../thank-you/',
+    developer: '../thank-you/'
+  },
+  // Seconds each image stays before the next one fades in.
+  slideSeconds: 4
+};
+
+/* Packages and prices from Prerna's dossier. Names are proposals until she approves them. */
+const PACKAGES = {
+  quarter:   { name: 'Quarter page', price: 10800, route: 'pay', includes: ['A quarter-page feature on one project'] },
+  half:      { name: 'Half page', price: 22000, route: 'pay', includes: ['A half-page feature on one project'] },
+  feature:   { name: 'The Feature', price: 32000, route: 'pay', includes: ['A full-page feature on one project'] },
+  cover:     { name: 'The Cover', price: 52000, route: 'call', includes: ['A cover with an article on your work', 'One of only four covers a month', 'A feature on Sylph’s Instagram'] },
+  founder:   { name: 'The Founder Edition', price: 122000, route: 'call', includes: ['A cover', 'A founder profile', 'Three projects featured', 'A feature on Sylph’s Instagram'] },
+  portfolio: { name: 'The Portfolio', price: 252000, route: 'call', includes: ['A cover and the back page', 'A two-page middle spread', 'A founder profile', 'Five projects featured'] },
+  // Coffee table books and custom editions are made by Sylph Consultancy and priced on the call (no fixed price yet).
+  book:      { name: 'A Legacy Book™ or custom edition', quote: true, route: 'call', includes: ['A Legacy Book™: a coffee table book on your work alone, on premium paper and in premium packaging', 'Or a custom Sylph edition with you on the cover, printed in a run of 1,000+ copies for your own clients', 'Made by Sylph Consultancy, planned with you page by page'] },
+  annual:    { name: 'The Annual Programme', price: 1000000, from: true, per: ' a year', route: 'call', includes: ['12 to 24 features across the year', 'Projects, advertisements and a founder profile', 'Planned edition by edition'] }
+};
+
+/* What each placement does for the buyer, per group. Same lines as {{placement_value}} in the email and WhatsApp sequences. */
+const DOES = {
+  "architect": {
+    "quarter": "A quarter page puts one project in front of Sylph’s UHNI readers, and lets you say “As featured in Sylph” from the day it runs.",
+    "half": "A half page gives one project room for the story behind it: a credential your proposals can carry from the day it runs.",
+    "feature": "A full-page feature turns your best project into a documented portfolio piece: the concept, materials and finish, in an editor’s voice.",
+    "cover": "A cover is the strongest credential Sylph offers: your work on one of only four covers a month, with the story inside and on Sylph’s Instagram.",
+    "founder": "The Founder Edition puts you on the cover with three projects inside: your name and your body of work, in one edition you can hand any client.",
+    "portfolio": "The Portfolio tells your studio at full scale: a cover, the back page, a two-page spread, a founder profile and five projects.",
+    "book": "A Legacy Book™ is a coffee table book on your studio alone: a permanent portfolio you can hand any client.",
+    "annual": "The Annual Programme keeps your studio in Sylph all year, so “As featured in Sylph” never goes out of date."
+  },
+  "brand": {
+    "quarter": "A quarter page puts one collection in front of UHNI homeowners and the architects who specify, and lets you say “As featured in Sylph” from the day it runs.",
+    "half": "A half page gives one collection room for the craft behind it: a credential for your showroom from the day it runs.",
+    "feature": "A full-page feature tells the craft behind one collection: material, making and finish, in an editor’s voice.",
+    "cover": "A cover is the strongest credential Sylph offers: your brand on one of only four covers a month, with the story inside and on Sylph’s Instagram.",
+    "founder": "The Founder Edition puts you on the cover with three collections or projects inside: the founder and the brand, in one edition.",
+    "portfolio": "The Portfolio tells your brand at full scale: a cover, the back page, a two-page spread, a founder profile and five features.",
+    "book": "A Legacy Book™ or a custom edition is about your brand alone: the strongest sales tool a showroom can hold.",
+    "annual": "The Annual Programme keeps your brand in front of the people who specify, edition after edition, all year."
+  },
+  "developer": {
+    "quarter": "A quarter page puts your project in front of 80,000+ UHNI and HNI readers, and gives your sales team “As featured in Sylph”.",
+    "half": "A half page gives your project room for the story behind it, and gives your sales team “As featured in Sylph”.",
+    "feature": "A full-page feature tells one project’s story: the design, the craftsmanship and the thinking behind it, in an editor’s voice.",
+    "cover": "A cover, timed to your launch, puts your project on one of only four Sylph covers a month: a credential for your sales team from day one.",
+    "founder": "The Founder Edition puts your founder on the cover with three projects inside: the name behind the project, told by our editors.",
+    "portfolio": "The Portfolio gives your projects a cover, the back page, a two-page spread, a founder profile and five features: a full launch story.",
+    "book": "A Legacy Book™ or a custom edition is about your projects alone. A custom edition is printed in a run of 1,000+ copies for your own buyers.",
+    "annual": "The Annual Programme keeps your projects and your name in front of UHNI buyers in every edition, all year."
+  }
+};
+Object.keys(PACKAGES).forEach(k => { PACKAGES[k].key = k; });
+
+/* ============================================================
+   THE FLOW
+   ============================================================ */
+const FACTS = {
+  intro: '7,000+ brands featured since 2021.',
+  contact: '60,000 to 70,000 copies a year, hand-delivered to UHNI and HNI homes.',
+  type: 'Sylph features the people who design, build and furnish India’s finest homes.',
+  architect: 'Read in the homes of the clients you want to work with next.',
+  brand: 'Seen by UHNI and HNI homeowners, and by the architects who choose what goes into their homes.',
+  developer: 'Known in UHNI circles before the sales conversation starts.',
+  goals: 'A feature lends you Sylph’s reputation, and keeps working long after the edition is read.',
+  ready: 'Sylph’s editors only feature luxury work, and ask for a re-shoot when photographs fall short.',
+  appear: 'Every placement has a fixed price. No negotiation, no middlemen.',
+  budget: 'Your answers stay with Sylph’s team.',
+  when: 'Four editions a month. Places go first come, first served.',
+  firm: 'One last detail, and your result is ready.'
+};
+
+const Q = {
+  intro: { kind: 'intro' },
+  contact: { kind: 'contact', h: 'First, who should we address?', lede: 'We use these only to share your result and to follow up on your feature.' },
+  type: { kind: 'single', key: 'type', h: 'Which best describes you?', opts: [
+    ['architect', 'Architect or interior designer'],
+    ['brand', 'Furniture, lighting or decor brand'],
+    ['developer', 'Real estate developer'],
+    ['other', 'Something else']
+  ]},
+  a_size: { kind: 'single', key: 'practice_size', plate: 'architect', h: 'How large is your practice?', opts: [['1-10', '1 to 10 people'], ['11-50', '11 to 50 people'], ['50+', 'More than 50 people']] },
+  a_work: { kind: 'single', key: 'project_type', plate: 'architect', h: 'What do you design most?', opts: [['homes', 'Luxury homes and villas'], ['apartments', 'Apartments'], ['commercial', 'Commercial and hospitality'], ['mix', 'A mix']] },
+  a_value: { kind: 'single', key: 'project_value', plate: 'architect', h: 'What is a typical project worth to you?', lede: 'This helps us suggest the right placement.', opts: [['lt50l', 'Under ₹50 lakh'], ['50l-2cr', '₹50 lakh to ₹2 Cr'], ['2-10cr', '₹2 Cr to ₹10 Cr'], ['gt10cr', 'Above ₹10 Cr']] },
+  b_make: { kind: 'single', key: 'category', plate: 'brand', h: 'What do you make or sell?', opts: [['furniture', 'Furniture'], ['lighting', 'Lighting'], ['decor', 'Decor and accessories'], ['surfaces', 'Surfaces and materials'], ['other', 'Something else']] },
+  b_reach: { kind: 'single', key: 'reach', plate: 'brand', h: 'Who do you most want to reach?', opts: [['architects', 'Architects and designers'], ['homeowners', 'UHNI and HNI homeowners'], ['both', 'Both']] },
+  b_where: { kind: 'multi', key: 'channels', plate: 'brand', h: 'Where do buyers find you today?', lede: 'Choose all that apply.', opts: [['showroom', 'Showroom'], ['online', 'Online'], ['exhibitions', 'Exhibitions'], ['architects', 'Through architects and designers']] },
+  d_build: { kind: 'single', key: 'build_type', plate: 'developer', h: 'What are you building?', opts: [['apartments', 'Luxury apartments'], ['villas', 'Villas'], ['commercial', 'Commercial'], ['mixed', 'Mixed use']] },
+  d_stage: { kind: 'single', key: 'project_stage', plate: 'developer', h: 'What stage is the project at?', opts: [['prelaunch', 'Pre-launch'], ['launching', 'Launching now'], ['construction', 'Under construction'], ['ready', 'Ready to move in']] },
+  d_city: { kind: 'text', key: 'project_city', plate: 'developer', h: 'Which city is the project in?', label: 'City', placeholder: 'For example, Gurugram' },
+  goals: { kind: 'multi', key: 'goals', h: 'What should this feature do for you?', lede: 'Choose all that apply.', opts: [
+    ['premium', 'Be seen as premium, and price like it'],
+    ['credential', 'Have a credential for client meetings and proposals'],
+    ['uhni', 'Put my work in front of UHNI and HNI homeowners'],
+    ['specified', 'Get specified by architects and designers'],
+    ['launch', 'Launch a project'],
+    ['founder', 'Build my name as a founder'],
+    ['press', 'Win press and awards']
+  ]},
+  ready: { kind: 'single', key: 'ready', h: 'Do you have a finished project ready to feature?', opts: [['photographed', 'Yes, and it is photographed'], ['needs_photos', 'Yes, but it needs photography'], ['in_progress', 'It is in progress'], ['not_yet', 'Not yet']] },
+  appear: { kind: 'single', key: 'appear', h: 'How would you like to appear in Sylph?', opts: [
+    ['feature', 'A feature on one project', 'Your project, written up on its own page'],
+    ['cover', 'A cover story', 'Your work on a cover, with the story inside'],
+    ['founder', 'A founder profile with several projects', 'You and your body of work, across several pages'],
+    ['year', 'A presence across the whole year', 'Planned appearances in every edition'],
+    ['book', 'A coffee table book or a custom edition', 'A Legacy Book™ on your work alone, or an edition printed for your own clients']
+  ]},
+  budget: { kind: 'single', key: 'budget', h: 'What have you set aside for press and visibility this year?', lede: 'There is no wrong answer. It helps us show you the right placement.', opts: [['lt50k', 'Under ₹50,000'], ['50k-2l', '₹50,000 to ₹2 lakh'], ['2l-5l', '₹2 lakh to ₹5 lakh'], ['gt5l', 'Above ₹5 lakh']] },
+  when: { kind: 'single', key: 'timing', h: 'When would you like to appear?', opts: [['next', 'In the next edition'], ['six_months', 'Within six months'], ['exploring', 'I am just exploring']] },
+  firm: { kind: 'firm', h: 'Finally, tell us about your firm.', lede: 'This is the name that would open your feature.' }
+};
+
+const BRANCH = {
+  architect: ['a_size', 'a_work', 'a_value'],
+  brand: ['b_make', 'b_reach', 'b_where'],
+  developer: ['d_build', 'd_stage', 'd_city']
+};
+const TOTAL = 12;
+
+function order() {
+  if (CONFIG.lockType) return ['intro', 'contact', ...BRANCH[CONFIG.lockType], 'goals', 'ready', 'appear', 'budget', 'when', 'firm'];
+  const t = state.answers.type;
+  const mid = t && BRANCH[t] ? BRANCH[t] : ['a_size', 'a_work', 'a_value'];
+  if (t === 'other') return ['intro', 'contact', 'type', 'firm'];
+  return ['intro', 'contact', 'type', ...mid, 'goals', 'ready', 'appear', 'budget', 'when', 'firm'];
+}
+
+/* ============================================================
+   STATE, STORAGE AND TRACKING
+   ============================================================ */
+const store = {
+  get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
+const params = new URLSearchParams(location.search);
+const saved = store.get('sylph_flow');
+const state = saved && saved.answers ? saved : {
+  id: (crypto.randomUUID ? crypto.randomUUID() : 'L' + Date.now() + Math.random().toString(16).slice(2)),
+  step: 0,
+  answers: {},
+  contact: {},
+  firm: {}
+};
+const source = {
+  page: params.get('page') || '',
+  utm_source: params.get('utm_source') || '',
+  utm_medium: params.get('utm_medium') || '',
+  utm_campaign: params.get('utm_campaign') || '',
+  utm_content: params.get('utm_content') || '',
+  fbclid: params.get('fbclid') || '',
+  referrer: document.referrer || ''
+};
+// Preview mode for the team: open the form with ?preview=1 to click through to the confirmation pages
+// before Razorpay and the calendar are connected. Buyers never see it, and nothing is charged or marked paid.
+let preview = params.get('preview') === '1';
+try { if (preview) sessionStorage.setItem('sylph_preview', '1'); else preview = sessionStorage.getItem('sylph_preview') === '1'; } catch (e) {}
+if (params.get('type') && !state.answers.type && BRANCH[params.get('type')]) state.answers.type = params.get('type');
+if (CONFIG.lockType && BRANCH[CONFIG.lockType] && state.answers.type !== CONFIG.lockType) {
+  // a buyer who earlier started another group's form starts this one fresh, keeping their contact details
+  state.answers = { type: CONFIG.lockType };
+  if (state.step > 2) state.step = 2;
+}
+
+function save() { store.set('sylph_flow', state); }
+
+function send(event, extra) {
+  const payload = Object.assign({ lead_id: state.id, event, at: new Date().toISOString(), step: order()[state.step] || 'result' },
+    state.contact, { firm: state.firm.name || '', city: state.firm.city || '', web: state.firm.web || '' },
+    { answers: JSON.stringify(state.answers) }, source, extra || {});
+  if (CONFIG.leadEndpoint) {
+    try {
+      fetch(CONFIG.leadEndpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload), keepalive: true });
+    } catch (e) {}
+  } else if (window.console) {
+    console.log('[Sylph lead]', payload);
+  }
+}
+
+function track(name, data) {
+  try {
+    if (window.fbq) {
+      const standard = { contact: 'Lead', pay_click: 'InitiateCheckout', call_click: 'Schedule' }[name];
+      if (standard) window.fbq('track', standard, data || {});
+      window.fbq('trackCustom', 'Sylph_' + name, data || {});
+    }
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(Object.assign({ event: 'sylph_' + name }, data || {}));
+  } catch (e) {}
+}
+
+/* ============================================================
+   PLACEHOLDER DRAWINGS (shown until real images are added)
+   ============================================================ */
+const G = '#C69B3C';
+function art(kind) {
+  const fields = { arch: '#0D4C3C', columns: '#0B1B3A', window: '#4A154B', stair: '#6E1423', lamp: '#000000', cover: '#000000', table: '#0D4C3C', vase: '#4A154B' };
+  const f = fields[kind] || '#000';
+  const s = `fill="none" stroke="${G}" stroke-width="1.2" vector-effect="non-scaling-stroke"`;
+  const shapes = {
+    arch: `<path ${s} d="M120 470 V230 A80 80 0 0 1 280 230 V470"/><path ${s} d="M140 470 V236 A60 60 0 0 1 260 236 V470"/><line ${s} x1="40" y1="470" x2="360" y2="470"/><line ${s} x1="200" y1="150" x2="200" y2="470" stroke-opacity=".35"/>`,
+    columns: [80, 160, 240, 320].map(x => `<path ${s} d="M${x - 18} 140 h36 M${x - 14} 150 h28 M${x - 10} 150 V430 M${x + 10} 150 V430 M${x - 16} 430 h32 M${x - 20} 440 h40"/>`).join('') + `<line ${s} x1="40" y1="130" x2="360" y2="130"/><line ${s} x1="40" y1="450" x2="360" y2="450"/>`,
+    window: `<rect ${s} x="110" y="70" width="180" height="380"/><line ${s} x1="200" y1="70" x2="200" y2="450"/>` + [146, 222, 298, 374].map(y => `<line ${s} x1="110" y1="${y}" x2="290" y2="${y}"/>`).join('') + `<path ${s} d="M110 70 A90 90 0 0 1 290 70" stroke-opacity=".5"/>`,
+    stair: Array.from({ length: 9 }, (_, i) => `<path ${s} d="M${70 + i * 30} ${450 - i * 36} h30 v-36"/>`).join('') + `<line ${s} x1="70" y1="410" x2="340" y2="110" stroke-opacity=".4"/>`,
+    lamp: `<line ${s} x1="200" y1="0" x2="200" y2="190"/><path ${s} d="M130 260 Q200 170 270 260 Z"/><ellipse ${s} cx="200" cy="262" rx="70" ry="8"/><line ${s} x1="200" y1="270" x2="200" y2="470" stroke-opacity=".25" stroke-dasharray="2 6"/><line ${s} x1="60" y1="470" x2="340" y2="470"/>`,
+    table: `<ellipse ${s} cx="200" cy="300" rx="130" ry="26"/><path ${s} d="M200 326 V450 M150 450 h100"/><path ${s} d="M175 274 q25 -70 50 0"/><line ${s} x1="40" y1="470" x2="360" y2="470"/>`,
+    vase: `<path ${s} d="M170 450 q-40 -90 0 -160 q-25 -40 10 -70 h40 q35 30 10 70 q40 70 0 160 Z"/><path ${s} d="M200 220 q-30 -80 -10 -150 M205 220 q30 -60 60 -110"/><line ${s} x1="60" y1="450" x2="340" y2="450"/>`,
+    cover: `<rect ${s} x="70" y="50" width="260" height="400"/><text class="cover-mast" x="200" y="110" text-anchor="middle" fill="${G}" font-family="Prata, Didot, Georgia, serif" font-size="34" letter-spacing="10">SYLPH</text><path ${s} d="M130 440 V290 A70 70 0 0 1 270 290 V440"/><line ${s} x1="90" y1="128" x2="310" y2="128" stroke-opacity=".5"/>`
+  };
+  return `<svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Placeholder drawing"><rect width="400" height="500" fill="${f}"/>${shapes[kind] || shapes.arch}</svg>`;
+}
+const ART = { intro: 'cover', contact: 'arch', type: 'columns', architect: 'window', brand: 'lamp', developer: 'columns', goals: 'stair', ready: 'table', appear: 'cover', budget: 'vase', when: 'arch', firm: 'window' };
+
+/* ============================================================
+   RENDERING
+   ============================================================ */
+const $ = (sel, el = document) => el.querySelector(sel);
+const stage = $('#stage'), plate = $('#plate'), cap = $('#cap');
+if (CONFIG.logo) document.querySelectorAll('.masthead').forEach(m => { m.innerHTML = `<img src="${CONFIG.logo}" alt="Sylph">`; });
+
+const inr = n => '₹' + n.toLocaleString('en-IN');
+const esc = s => String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+let PHOTO = null;
+const GAL = { covers: [], architects: [], brands: [], developers: [] };
+const TYPECAT = { architect: 'architects', brand: 'brands', developer: 'developers' };
+let slideTimer = null, plateKeyNow = null, plateArt = false;
+const calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function srcOf(name) { return (CONFIG.assets || '../assets/') + name + '.webp'; }
+function loadGallery() {
+  Object.keys(GAL).forEach(cat => { GAL[cat] = (CONFIG.gallery[cat] || []).map(srcOf); });
+}
+
+function catFor(key) {
+  if (['a_size', 'a_work', 'a_value', 'architect'].includes(key)) return 'architects';
+  if (['b_make', 'b_reach', 'b_where', 'brand'].includes(key)) return 'brands';
+  if (['d_build', 'd_stage', 'd_city', 'developer'].includes(key)) return 'developers';
+  if (['goals', 'ready', 'firm'].includes(key) && TYPECAT[state.answers.type]) return TYPECAT[state.answers.type];
+  return 'covers';
+}
+function pool(cat) {
+  if (GAL[cat].length) return GAL[cat];
+  return [...GAL.covers, ...GAL.architects, ...GAL.brands, ...GAL.developers];
+}
+
+function showNode(node) {
+  node.style.opacity = 0;
+  plate.appendChild(node);
+  requestAnimationFrame(() => { node.style.opacity = 1; });
+  [...plate.children].slice(0, -1).forEach(old => { old.style.opacity = 0; setTimeout(() => old.remove(), 650); });
+}
+function imgNode(src) {
+  const im = document.createElement('img'); im.alt = ''; im.decoding = 'async';
+  const b = src.replace(/\.webp$/, '');
+  if (b !== src) { im.srcset = b + '-s.webp 560w, ' + b + '-m.webp 820w, ' + src + ' 1080w'; im.sizes = '(max-width: 900px) 100vw, 50vw'; }
+  im.src = src;
+  im.onerror = () => { im.remove(); };
+  return im;
+}
+function artNode(key) { const d = document.createElement('div'); d.innerHTML = art(ART[key] || 'arch'); d.firstChild.style.width = '100%'; d.firstChild.style.height = '100%'; return d; }
+
+function setPlate(key, caption) {
+  clearInterval(slideTimer);
+  plateKeyNow = key;
+  const list = pool(catFor(key));
+  if (!list.length) { plateArt = true; showNode(artNode(key)); }
+  else {
+    plateArt = false;
+    let i = (state.step * 3) % list.length;
+    showNode(imgNode(list[i]));
+    if (list.length > 1 && !calm) slideTimer = setInterval(() => { i = (i + 1) % list.length; showNode(imgNode(list[i])); }, CONFIG.slideSeconds * 1000);
+  }
+  cap.textContent = caption || '';
+}
+
+function render() {
+  const keys = order();
+  if (state.step >= keys.length) return result();
+  const key = keys[state.step];
+  const q = Q[key];
+  const n = state.step + 1;
+  const total = (state.answers.type === 'other' || CONFIG.lockType) ? keys.length : TOTAL;
+  $('#folioL').textContent = `Page ${n} of ${total}`;
+  $('#folioR').textContent = n > 1 ? `p. ${n}` : '';
+  $('#bar').style.width = (state.step / total * 100) + '%';
+  const plateKey = q.plate || key;
+  setPlate(plateKey, FACTS[plateKey] || FACTS[key]);
+
+  let html = '';
+  if (q.kind === 'intro') {
+    html = `<div class="intro"><h1 tabindex="-1">Is your work right for Sylph?</h1>
+      <p class="lede">Answer a few short questions about your work. At the end you will see the placement that fits it, with its fixed price.</p>
+      <div class="controls"><button class="btn" data-next>Begin</button></div>
+      <p class="small">Sylph is delivered to the homes of India’s UHNI and HNI families.</p></div>`;
+  } else if (q.kind === 'contact') {
+    const c = state.contact;
+    html = `<h1 tabindex="-1">${q.h}</h1><p class="lede">${q.lede}</p>
+      ${field('name', 'Full name', c.name, 'text', 'name', 'Please enter your name.', 'Your full name')}
+      ${field('phone', 'WhatsApp number', c.phone, 'tel', 'tel', 'Please enter a valid 10-digit phone number.', '10-digit number', 'maxlength="10" inputmode="numeric" pattern="[0-9]{10}"')}
+      ${field('email', 'Email', c.email, 'email', 'email', 'Please enter a valid email address.', 'you@studio.com')}
+      ${CONFIG.privacyUrl ? `<p class="note">By continuing, you agree to Sylph\u2019s <a href="${CONFIG.privacyUrl}" target="_blank" rel="noopener">privacy policy</a>.</p>` : ''}
+      ${controls(true)}`;
+  } else if (q.kind === 'single' || q.kind === 'multi') {
+    const cur = state.answers[q.key];
+    const multi = q.kind === 'multi';
+    html = `<h1 tabindex="-1">${q.h}</h1>${q.lede ? `<p class="lede">${q.lede}</p>` : ''}
+      <div class="options ${multi ? 'multi' : ''}" role="${multi ? 'group' : 'radiogroup'}" aria-label="${esc(q.h)}">
+      ${q.opts.map(([v, label, sub]) => {
+        const on = multi ? (cur || []).includes(v) : cur === v;
+        return `<button class="opt" role="${multi ? 'checkbox' : 'radio'}" aria-checked="${on}" data-v="${v}"><span class="mark"></span><span><b>${label}</b>${sub ? `<small>${sub}</small>` : ''}</span></button>`;
+      }).join('')}</div>${controls(multi ? (cur || []).length > 0 : !!cur, multi ? '' : 'Choose one to continue')}`;
+  } else if (q.kind === 'text') {
+    html = `<h1 tabindex="-1">${q.h}</h1>${field(q.key, q.label, state.answers[q.key], 'text', 'address-level2', 'Please enter a city.', q.placeholder)}${controls(true)}`;
+  } else if (q.kind === 'firm') {
+    const f = state.firm;
+    html = `<h1 tabindex="-1">${q.h}</h1><p class="lede">${q.lede}</p>
+      ${field('fname', 'Firm or brand name', f.name, 'text', 'organization', 'Please enter your firm or brand name.', 'For example, Studio Design')}
+      ${field('fcity', 'City', f.city || state.answers.project_city, 'text', 'address-level2', 'Please enter a city.', 'For example, Mumbai')}
+      ${field('fweb', 'Instagram handle or website', f.web, 'text', 'url', 'Please enter your Instagram handle or website.', '@yourstudio or yourstudio.com')}
+      <div class="field upload"><span class="ulabel">A photograph of your best project (optional)</span>
+        <label class="ubtn" for="fphoto"><span id="fphotoName">${PHOTO ? 'Photograph added. Choose another' : 'Choose a photograph'}</span></label>
+        <input id="fphoto" type="file" accept="image/*" class="sr">
+        <p class="note">We use it only to show you a preview of your feature. It is not sent anywhere.</p></div>
+      ${controls(true, '', 'See my result')}`;
+  }
+  stage.innerHTML = `<div class="screen on">${html}</div>`;
+  const h = $('h1', stage); if (h && state.step > 0) h.focus({ preventScroll: true });
+  wire(q);
+}
+
+function field(id, label, val, type, auto, err, ph, extra) {
+  return `<div class="field" id="f_${id}"><label for="${id}">${label}${err ? '' : ' (optional)'}</label>
+    <input id="${id}" type="${type}" autocomplete="${auto}" value="${esc(val)}" ${ph ? `placeholder="${esc(ph)}"` : ''} ${extra || ''}>
+    ${err ? `<p class="err" role="alert">${err}</p>` : ''}</div>`;
+}
+function controls(enabled, hint, label) {
+  return `<div class="controls">${state.step > 0 ? '<button class="link back" data-back>Back</button>' : ''}
+    <button class="btn" data-next ${enabled ? '' : 'disabled'}>${label || 'Continue'}</button>${hint && !enabled ? `<span class="hint">${hint}</span>` : ''}</div>`;
+}
+
+function wire(q) {
+  stage.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const v = b.dataset.v;
+    if (q.kind === 'multi') {
+      const arr = state.answers[q.key] || [];
+      state.answers[q.key] = arr.includes(v) ? arr.filter(x => x !== v) : [...arr, v];
+      b.setAttribute('aria-checked', state.answers[q.key].includes(v));
+      $('[data-next]', stage).disabled = state.answers[q.key].length === 0;
+    } else {
+      state.answers[q.key] = v;
+      stage.querySelectorAll('.opt').forEach(o => o.setAttribute('aria-checked', o === b));
+      save();
+      setTimeout(next, 260);
+      return;
+    }
+    save();
+  }));
+  const nx = $('[data-next]', stage); if (nx) nx.addEventListener('click', next);
+  const ph = $('#fphoto', stage);
+  if (ph) ph.addEventListener('change', () => {
+    const file = ph.files && ph.files[0]; if (!file) return;
+    const url = URL.createObjectURL(file); const im = new Image();
+    im.onload = () => {
+      const k = Math.min(1, 1400 / Math.max(im.width, im.height));
+      const c = document.createElement('canvas'); c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+      c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+      PHOTO = c.toDataURL('image/jpeg', 0.86); URL.revokeObjectURL(url);
+      $('#fphotoName').textContent = 'Photograph added. Choose another';
+      showNode(imgNode(PHOTO)); clearInterval(slideTimer); cap.textContent = 'Your project. It will open your preview.';
+    };
+    im.src = url;
+  });
+  const bk = $('[data-back]', stage); if (bk) bk.addEventListener('click', () => { state.step = Math.max(0, state.step - 1); save(); render(); });
+  stage.querySelectorAll('input').forEach(i => i.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); next(); } }));
+
+  // Strict 10-digit phone input handling: only allow 10 digits, prevent below or above 10 digits
+  const phoneInput = $('#phone', stage);
+  if (phoneInput) {
+    phoneInput.addEventListener('keydown', e => {
+      // Allow navigation and editing keys
+      if (['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete', 'Enter', 'Home', 'End'].includes(e.key) || e.ctrlKey || e.metaKey) {
+        return;
+      }
+      // Block any non-digit key
+      if (!/^\d$/.test(e.key)) {
+        e.preventDefault();
+        return;
+      }
+      // Don't allow typing more than 10 digits
+      if (phoneInput.value.length >= 10 && phoneInput.selectionStart === phoneInput.selectionEnd) {
+        e.preventDefault();
+      }
+    });
+
+    phoneInput.addEventListener('input', () => {
+      // Strip any non-digit character and restrict length to maximum 10 digits
+      const cleaned = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+      if (phoneInput.value !== cleaned) {
+        phoneInput.value = cleaned;
+      }
+      if (cleaned.length === 10) {
+        check('phone', true);
+      }
+    });
+
+    phoneInput.addEventListener('paste', e => {
+      e.preventDefault();
+      const pasteText = (e.clipboardData || window.clipboardData).getData('text') || '';
+      const digitsOnly = pasteText.replace(/\D/g, '');
+      const start = phoneInput.selectionStart;
+      const end = phoneInput.selectionEnd;
+      const cur = phoneInput.value;
+      const nextVal = (cur.slice(0, start) + digitsOnly + cur.slice(end)).replace(/\D/g, '').slice(0, 10);
+      phoneInput.value = nextVal;
+      if (nextVal.length === 10) {
+        check('phone', true);
+      }
+    });
+
+    phoneInput.addEventListener('blur', () => {
+      if (phoneInput.value.length > 0) {
+        check('phone', okPhone(phoneInput.value));
+      }
+    });
+  }
+
+  // Real-time validation for contact fields
+  const nameInput = $('#name', stage);
+  if (nameInput) {
+    nameInput.addEventListener('input', () => {
+      if (nameInput.value.trim().length >= 2) check('name', true);
+    });
+    nameInput.addEventListener('blur', () => {
+      if (nameInput.value.trim().length > 0) check('name', nameInput.value.trim().length >= 2);
+    });
+  }
+
+  const emailInput = $('#email', stage);
+  if (emailInput) {
+    emailInput.addEventListener('input', () => {
+      if (okEmail(emailInput.value.trim())) check('email', true);
+    });
+    emailInput.addEventListener('blur', () => {
+      if (emailInput.value.trim().length > 0) check('email', okEmail(emailInput.value.trim()));
+    });
+  }
+
+  // Real-time validation for firm fields and text fields
+  ['fname', 'fcity', 'fweb', q.key].forEach(id => {
+    if (!id || id === 'phone' || id === 'name' || id === 'email') return;
+    const el = $('#' + id, stage);
+    if (el) {
+      el.addEventListener('input', () => {
+        if (el.value.trim().length >= 2) check(id, true);
+      });
+      el.addEventListener('blur', () => {
+        if (el.value.trim().length > 0) check(id, el.value.trim().length >= 2);
+      });
+    }
+  });
+}
+
+// Exactly 10 digits allowed: below or above 10 digits is invalid
+const okPhone = v => /^[0-9]{10}$/.test(String(v || '').trim());
+const okEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(v || '').trim());
+
+function check(id, ok) { const f = $('#f_' + id); if (f) f.classList.toggle('bad', !ok); return ok; }
+
+function next() {
+  const key = order()[state.step];
+  const q = Q[key];
+  if (q.kind === 'contact') {
+    const name = $('#name').value.trim(), phone = $('#phone').value.trim(), email = $('#email').value.trim();
+    const ok = [
+      check('name', name.length >= 2),
+      check('phone', okPhone(phone)),
+      check('email', okEmail(email))
+    ].every(Boolean);
+    if (!ok) { const bad = $('.field.bad input', stage); if (bad) bad.focus(); return; }
+    state.contact = { name, phone, email };
+    save(); send('contact'); track('contact');
+  } else if (q.kind === 'text') {
+    const v = $('#' + q.key).value.trim();
+    if (!check(q.key, v.length >= 2)) {
+      const bad = $('.field.bad input', stage);
+      if (bad) bad.focus();
+      return;
+    }
+    state.answers[q.key] = v;
+  } else if (q.kind === 'firm') {
+    const name = $('#fname').value.trim(), city = $('#fcity').value.trim(), web = $('#fweb').value.trim();
+    const ok = [
+      check('fname', name.length >= 2),
+      check('fcity', city.length >= 2),
+      check('fweb', web.length >= 2)
+    ].every(Boolean);
+    if (!ok) { const bad = $('.field.bad input', stage); if (bad) bad.focus(); return; }
+    state.firm = { name, city, web, photo: PHOTO ? 'yes' : 'no' };
+  } else if (q.kind === 'intro') {
+    send('started'); track('started');
+  } else if ((q.kind === 'single' && !state.answers[q.key]) || (q.kind === 'multi' && !(state.answers[q.key] || []).length)) {
+    return;
+  }
+  if (q.kind !== 'contact' && q.kind !== 'intro') send('answer', { question: key });
+  state.step += 1; save(); render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ============================================================
+   GETNOS DESK API INTEGRATION
+   ============================================================ */
+const DESK_URL = "https://deskbackend.getnos.io/v1/lead";
+const API_KEY = "lh_u3xQxHIHMfWMVDrAci_qUhkP6FYvA7R5DmrjDKwBaVE";
+
+let submitting = false;
+
+/**
+ * @param {Record<string, string>} fields flat lead answers (any custom keys OK)
+ * @returns {Promise<{ status?: string, leadId?: string, duplicate?: boolean, skipped?: boolean, message?: string }>}
+ */
+async function submitLead(fields) {
+  if (submitting) return { duplicate: true, skipped: true };
+  submitting = true;
+  try {
+    const res = await fetch(DESK_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${API_KEY}`,
+      },
+      body: JSON.stringify({
+        form: "contact",
+        honeypot: fields.honeypot || "",
+        // Spread ALL form answers — known + custom fields become columns
+        ...fields,
+        // Subject name Sylph Consultancy Leads qualified
+        subject: fields.subject || "Sylph Consultancy Leads qualified",
+      }),
+      keepalive: true,
+    });
+
+    let data = {};
+    try {
+      data = await res.json();
+    } catch {
+      data = {};
+    }
+
+    // Desk ignores identical payloads for ~15 min — treat as success
+    if (data.duplicate) return data;
+
+    if (!res.ok) {
+      throw new Error(data.message || `Lead submit failed (${res.status})`);
+    }
+
+    return data; // { status: "success", leadId }
+  } finally {
+    submitting = false;
+  }
+}
+
+if (typeof window !== "undefined") {
+  window.submitLead = submitLead;
+}
+
+/* ============================================================
+   RESULT: where each buyer goes
+   ============================================================ */
+function decide() {
+  const a = state.answers;
+  if (a.type === 'other') return { end: 'other' };
+  if (a.ready === 'not_yet' || a.timing === 'exploring') return { end: 'notyet' };
+  let rec = { feature: 'feature', cover: 'cover', founder: 'founder', year: 'annual', book: 'book' }[a.appear] || 'feature';
+  let alt = null;
+  if (rec === 'book') return { end: 'fit', rec, alt: null, route: 'call', upsell: null };
+  if (a.budget === '2l-5l' && ['feature', 'cover', 'founder'].includes(rec)) alt = 'portfolio';
+  if (a.budget === 'gt5l' && rec !== 'annual') alt = 'annual';
+  const bigBudget = a.budget === '2l-5l' || a.budget === 'gt5l';
+  const route = (rec === 'feature' && !bigBudget && a.type !== 'developer') ? 'pay' : 'call';
+  const bigWork = ['2-10cr', 'gt10cr'].includes(a.project_value) || (a.goals || []).includes('founder');
+  const upsell = route === 'pay' && bigWork ? 'cover' : null;
+  return { end: 'fit', rec, alt, route, upsell };
+}
+
+function result() {
+  const d = decide();
+  state.result = d; save();
+  send('result', { route: d.route || d.end, package: d.rec || '', alt_package: d.alt || d.upsell || '' });
+  track('result', { route: d.route || d.end });
+
+  // Submit lead to Getnos Desk API
+  const leadFields = {
+    subject: "Sylph Consultancy Leads qualified",
+    name: state.contact.name || "",
+    phone: state.contact.phone || "",
+    email: state.contact.email || "",
+    firm: (state.firm && state.firm.name) || "",
+    brand: (state.firm && state.firm.name) || "",
+    city: (state.firm && state.firm.city) || state.answers.project_city || "",
+    website: (state.firm && state.firm.web) || "",
+    business_type: state.answers.type || CONFIG.lockType || "brand",
+    recommended_package: (PACKAGES[d.rec] && PACKAGES[d.rec].name) || d.rec || "",
+    package_price: (PACKAGES[d.rec] && PACKAGES[d.rec].price) ? inr(PACKAGES[d.rec].price) : "",
+    route: d.route || d.end || "",
+    page: source.page || window.location.href,
+    source: source.utm_source || "website",
+    utm_source: source.utm_source || "",
+    utm_medium: source.utm_medium || "",
+    utm_campaign: source.utm_campaign || "",
+    utm_content: source.utm_content || "",
+    lead_id: state.id || ""
+  };
+
+  for (const [k, v] of Object.entries(state.answers)) {
+    leadFields[k] = Array.isArray(v) ? v.join(", ") : String(v);
+  }
+
+  submitLead(leadFields).then(res => {
+    if (window.console) console.log('[Getnos Desk] Lead submitted:', res);
+  }).catch(err => {
+    if (window.console) console.warn('[Getnos Desk] Lead submit error:', err);
+  });
+  $('#folioL').textContent = 'Your result';
+  $('#folioR').textContent = '';
+  $('#bar').style.width = '100%';
+  document.body.classList.add('done');
+  showProof();
+  const first = esc(nice((state.contact.name || '').split(' ')[0]));
+  let html = '';
+
+  if (d.end === 'other') {
+    html = `<h1 tabindex="-1">Thank you, ${first}.</h1><p class="lede">Sylph features architects, interior designers, home brands and developers. Our team will read your details and write to you if there is a fit.</p><div class="actions"><a class="btn quiet" href="${thankYou('other')}">See what Sylph publishes</a></div>`;
+  } else if (d.end === 'notyet') {
+    html = `<h1 tabindex="-1">Your collection is nearly there, ${first}.</h1>
+      <p class="lede">Sylph features finished, photographed work. Our free guide, The Brand Architects Remember, shows what editors look for, so your collection is ready when it is complete. We will also write to you as the next editions fill.</p>
+      <div class="actions"><button class="btn" data-guide>Get the free guide</button></div>
+      <div class="after" id="after"><p>The guide is on its way to ${esc(state.contact.email)}.</p></div>`;
+  } else {
+    const p = PACKAGES[d.rec];
+    const alt = d.alt ? PACKAGES[d.alt] : null;
+    if (d.route === 'pay') {
+      html = `<h1 tabindex="-1">Your work is a fit for Sylph, ${first}.</h1>
+        <p class="lede">Here is the placement that suits your project. You can reserve it now.</p>
+        ${pkgBlock(p)}
+        <p class="also">Prefer a smaller placement? <button class="link" data-swap="half">Half page, ${inr(PACKAGES.half.price)}</button> or <button class="link" data-swap="quarter">quarter page, ${inr(PACKAGES.quarter.price)}</button>.</p>
+        <div class="actions"><a class="btn" data-pay href="#">Reserve my placement</a></div>
+        <p class="note gstline">Need a GST invoice? Add your GST details on the confirmation page after payment, and it will be shared with you.</p>
+        <div class="after" id="after"></div>`;
+    } else {
+      html = d.rec === 'book' ? `<h1 tabindex="-1">Let’s plan your book together, ${first}.</h1>
+        <p class="lede">Coffee table books and custom editions are planned with Sylph Consultancy’s team, page by page. Choose a time to talk.</p>` : `<h1 tabindex="-1">Let’s plan your feature together, ${first}.</h1>
+        <p class="lede">Placements like this are planned with Sylph’s team, around your projects and the edition calendar. Choose a time to talk.</p>`;
+      html += `
+        ${pkgBlock(p)}
+        ${alt ? `<p class="also">Also worth discussing on the call: ${alt.name}, ${alt.from ? 'from ' : ''}${inr(alt.price)}${alt.per || ''}.</p>` : ''}
+        <div class="actions"><a class="btn" data-call href="#">Book my editorial call</a></div>
+        <div class="after" id="after"></div>`;
+    }
+  }
+  stage.innerHTML = `<div class="screen on">${html}</div>`;
+  $('h1', stage).focus({ preventScroll: true });
+  wireResult(d);
+}
+
+function doesLine(p) {
+  const g = CONFIG.lockType || state.answers.type || 'architect';
+  const t = (DOES[g] || DOES.architect)[p.key];
+  return t ? `<p class="does"><span>What it does for you</span>${t}</p>` : '';
+}
+
+function pkgBlock(p) {
+  if (p.quote) return `<div class="pkg" id="pkg"><div class="row"><h2>${p.name}</h2><div class="price">On the call<small>Priced to your book</small></div></div>
+    ${doesLine(p)}<ul>${p.includes.map(i => `<li>${i}</li>`).join('')}</ul></div>`;
+  return `<div class="pkg" id="pkg"><div class="row"><h2>${p.name}</h2><div class="price">${p.from ? '<small>From</small>' : ''}${inr(p.price)}${p.per ? `<small>${p.per.trim()}</small>` : ''}<small>${CONFIG.gstNote}</small></div></div>
+    ${doesLine(p)}<ul>${p.includes.map(i => `<li>${i}</li>`).join('')}</ul></div>`;
+}
+
+function thankYou(status, extra) {
+  const base = (CONFIG.thankYou || {})[state.answers.type] || CONFIG.thankYou.architect;
+  const q = new URLSearchParams(Object.assign({ status }, extra || {}));
+  ['utm_source', 'utm_campaign', 'utm_content'].forEach(k => { if (source[k]) q.set(k, source[k]); });
+  if (preview) q.set('preview', '1');
+  return base + '?' + q.toString();
+}
+
+function calendarLink() {
+  if (!CONFIG.calendarUrl) return '';
+  const u = new URL(CONFIG.calendarUrl);
+  u.searchParams.set('name', state.contact.name || '');
+  u.searchParams.set('email', state.contact.email || '');
+  u.searchParams.set('a1', state.contact.phone || '');
+  return u.toString();
+}
+
+function wireResult(d) {
+  let pkgKey = d.rec;
+  const after = $('#after');
+  const say = html => { if (after) { after.innerHTML = html; after.classList.add('on'); } };
+
+  stage.querySelectorAll('[data-swap]').forEach(b => b.addEventListener('click', () => {
+    pkgKey = b.dataset.swap;
+    $('#pkg').outerHTML = pkgBlock(PACKAGES[pkgKey]);
+    send('package_change', { package: pkgKey });
+  }));
+
+  const pay = $('[data-pay]', stage);
+  if (pay) pay.addEventListener('click', e => {
+    e.preventDefault();
+    const link = CONFIG.razorpay[pkgKey];
+    send('pay_click', { package: pkgKey, price: PACKAGES[pkgKey].price });
+    track('pay_click', { value: PACKAGES[pkgKey].price, currency: 'INR' });
+    if (link) { pay.textContent = 'Opening secure payment\u2026'; setTimeout(() => { location.href = link; }, 250); }
+    else if (preview) { pay.textContent = 'Preview: opening the confirmation page\u2026'; setTimeout(() => { location.href = thankYou('paid', { pkg: pkgKey }); }, 250); }
+    else say('<p>The payment page will open here once it is connected.</p>');
+  });
+
+  const guide = $('[data-guide]', stage);
+  if (guide) guide.addEventListener('click', () => {
+    send('guide_request'); track('guide_request');
+    say(`<p>Opening your guide.</p>`);
+    setTimeout(() => { location.href = thankYou('guide'); }, 600);
+  });
+  wireCall();
+
+  function wireCall() {
+    stage.querySelectorAll('[data-call]').forEach(b => {
+      if (b.dataset.wired) return; b.dataset.wired = '1';
+      b.addEventListener('click', e => {
+        e.preventDefault();
+        send('call_click', { package: pkgKey });
+        track('call_click');
+        const link = calendarLink();
+        if (link) { b.textContent = 'Opening the calendar\u2026'; setTimeout(() => { location.href = link; }, 250); }
+        else if (preview) { b.textContent = 'Preview: opening the confirmation page\u2026'; setTimeout(() => { location.href = thankYou('call'); }, 250); }
+        else say('<p>The booking calendar will open here once it is connected.</p>');
+      });
+    });
+  }
+}
+
+/* The buyer's own preview, set on the plate: a cover, a feature spread or a year in Sylph */
+const SMALL = ['and', 'of', 'the', 'by', 'in', 'for', 'at', 'on', 'to'];
+function nice(s) {
+  s = String(s || '').trim().replace(/\s+/g, ' ');
+  if (!s || s !== s.toLowerCase()) return s;
+  return s.split(' ').map((w, i) => (i > 0 && SMALL.includes(w)) ? w : w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+}
+const up1 = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+const KIND = { architect: 'Architecture and interiors', brand: 'Design and craft', developer: 'Residences' };
+const WORK = {
+  architect: { homes: 'luxury homes and villas', apartments: 'apartments', commercial: 'commercial and hospitality spaces', mix: 'homes and spaces' },
+  brand: { furniture: 'furniture', lighting: 'lighting', decor: 'decor and accessories', surfaces: 'surfaces and materials', other: 'design' },
+  developer: { apartments: 'luxury residences', villas: 'villas', commercial: 'commercial spaces', mixed: 'mixed-use spaces' }
+};
+
+function story() {
+  const a = state.answers, t = a.type, d = state.result || {};
+  const firm = nice(state.firm.name) || 'Your firm';
+  const city = nice(state.firm.city || a.project_city || '');
+  const pcity = nice(a.project_city || state.firm.city || '');
+  const person = nice(state.contact.name || '');
+  const work = (WORK[t] || {})[a.project_type || a.category || a.build_type] || '';
+  let dek = '', lines = [];
+  if (t === 'architect') dek = `Inside the ${work || 'work'} of a ${city} practice`;
+  else if (t === 'brand') dek = `${up1(work || 'design')} from ${city}, made for the finest homes`;
+  else if (t === 'developer') dek = `${up1(work || 'new residences')} in ${pcity}`;
+  else dek = city;
+  const founder = (a.goals || []).includes('founder') || ['founder', 'portfolio', 'annual'].includes(d.rec);
+  const own = person && person.split(' ').some(w => w.length > 2 && firm.toLowerCase().includes(w.toLowerCase()));
+  if (founder) lines.push(person && !own ? `${person} on building ${firm}` : 'The founder\u2019s story');
+  if (t === 'architect' && work) lines.push(`${up1(work)}, ${city}`);
+  if (t === 'brand') lines.push(a.reach === 'homeowners' ? 'For the homes that set the standard' : 'For the architects who specify');
+  if (t === 'developer') { const st = { prelaunch: 'A first look before launch', launching: 'Now launching', construction: 'Rising now', ready: 'Ready to move in' }[a.project_stage]; if (st) lines.push(st); }
+  if (d.rec === 'portfolio') lines.push('Five projects inside');
+  return { firm, city, person, dek, lines: lines.slice(0, 3), kind: KIND[t] || '' };
+}
+
+function heroList() { return ((CONFIG.hero || {})[state.answers.type] || CONFIG.hero.architect || []).map(srcOf); }
+function heroSrc() {
+  if (PHOTO) return PHOTO;
+  return heroList()[0] || '';
+}
+function bg(src, key) { return src ? `<img alt="" src="${src}">` : art(key || 'arch'); }
+
+function showProof() {
+  clearInterval(slideTimer);
+  const d = state.result || {}, st = story();
+  const rec = d.rec || (d.end === 'notyet' ? 'feature' : '');
+  const div = document.createElement('div');
+  let caption = '';
+  if (['cover', 'founder', 'portfolio', 'book'].includes(rec)) {
+    div.className = 'pv cover';
+    div.innerHTML = `<div class="cv-bg">${bg(heroSrc(), 'window')}</div>
+      <div class="cv-mast">SYLPH</div><div class="cv-ed">${rec === 'book' ? 'A Sylph Consultancy book' : 'The next edition'}</div>
+      <div class="cv-lines">${st.lines.map(l => `<p>${esc(l)}</p>`).join('')}</div>
+      <div class="cv-star"><h3>${esc(st.firm)}</h3><p>${esc(st.dek)}</p></div>`;
+    caption = rec === 'book' ? 'Your book, as its cover could look. Final design by Sylph\u2019s team.' : 'Your cover, as it could appear. Final design by Sylph\u2019s editors.';
+  } else if (rec === 'annual') {
+    const plan = ['Cover story', 'Founder profile', 'Project feature', 'Project feature'];
+    const imgs = [heroSrc(), ...heroList().slice(1), ...heroList()];
+    div.className = 'pv year';
+    div.innerHTML = `<h4>Your year in Sylph</h4><div class="yr-grid">${plan.map((p, i) => `
+      <div class="yr"><div class="mini">${bg(imgs[i] || imgs[0], ['window', 'arch', 'columns', 'lamp'][i])}<span>SYLPH</span><b>${esc(st.firm)}</b></div>
+      <p><em>Edition ${i + 1}</em>${p}</p></div>`).join('')}</div>`;
+    caption = 'Your year in Sylph, as it could look. Planned with you, edition by edition.';
+  } else if (rec) {
+    div.className = 'pv fspread';
+    div.innerHTML = `<div class="sp-l">${bg(heroSrc(), 'arch')}<span>${esc(st.firm)}${st.city ? ', ' + esc(st.city) : ''}</span></div>
+      <div class="sp-r"><div class="sp-k">${esc(st.kind)}</div><h3>${esc(st.firm)}</h3><p class="sp-dek">${esc(st.dek)}.</p>
+      <p class="sp-by">Words by Sylph\u2019s editors</p>
+      <div class="sp-txt"><b>${esc(st.firm.charAt(0))}</b><i></i><i></i><i></i><i style="width:80%"></i><i></i><i style="width:62%"></i></div>
+      <div class="sp-fo"><span>Sylph</span><span>The next edition</span></div></div>`;
+    caption = d.end === 'notyet' ? 'How your project could open, once it is finished.' : 'Your feature, as it could open. Final design by Sylph\u2019s editors.';
+  } else { setPlate('covers', ''); return; }
+  showNode(div);
+  requestAnimationFrame(() => div.classList.add('on'));
+  cap.textContent = caption;
+}
+
+loadGallery();
+
+/* Resume where the buyer left off, or start fresh */
+if (params.has('restart')) { state.step = 0; state.answers = {}; state.contact = {}; state.firm = {}; }
+if (state.step > order().length) state.step = order().length;
+render();
+</script>
+</body>
+</html>

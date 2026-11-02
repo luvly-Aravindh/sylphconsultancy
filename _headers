@@ -1,0 +1,19 @@
+# Netlify headers for the Sylph Brands site
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/assets/*
+  Cache-Control: public, max-age=2592000
+
+/guide/*
+  Cache-Control: public, max-age=86400
+
+/eligibility/*
+  X-Robots-Tag: noindex
+
+/all-pages.html
+  X-Robots-Tag: noindex
+
+/thank-you/*
+  X-Robots-Tag: noindex
