@@ -1022,7 +1022,11 @@ function thankYou(status, extra) {
 
 function calendarLink() {
   if (!CONFIG.calendarUrl) return '';
-  return new URL(CONFIG.calendarUrl).toString();
+  // Pre-fill TidyCal's booking form with the name and email already given in this form.
+  const u = new URL(CONFIG.calendarUrl);
+  if (state.contact.name) u.searchParams.set('name', state.contact.name);
+  if (state.contact.email) u.searchParams.set('email', state.contact.email);
+  return u.toString();
 }
 
 function wireResult(d) {
