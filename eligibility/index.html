@@ -295,7 +295,7 @@ const CONFIG = {
   lockType: 'brand',
   // Calendar link for editorial calls (TidyCal or Calendly). Name, email and phone are added to the link.
   // Only bigger placements see it. Set the calendar's after-booking redirect to the thank-you page with ?status=call.
-  calendarUrl: '',
+  calendarUrl: 'https://tidycal.com/sylphconsultancy/30-minute-meeting-brand',
   // Razorpay payment page links, one per online package (Aravindh). The buyer goes straight there in the same tab.
   // Set each link's success redirect to the thank-you page with ?status=paid&pkg=feature (or half, quarter).
   // GST invoices are handled after payment, on the thank-you page. Nothing extra before paying.
@@ -949,6 +949,11 @@ function result() {
 
   submitLead(leadFields).then(res => {
     if (window.console) console.log('[Getnos Desk] Lead submitted:', res);
+    // Lead saved: send the buyer on to this page's TidyCal booking page.
+    // A skipped call means another submit is already in flight, and that one redirects.
+    if (res && res.skipped) return;
+    const link = calendarLink();
+    if (link) location.assign(link);
   }).catch(err => {
     if (window.console) console.warn('[Getnos Desk] Lead submit error:', err);
   });
@@ -1017,11 +1022,7 @@ function thankYou(status, extra) {
 
 function calendarLink() {
   if (!CONFIG.calendarUrl) return '';
-  const u = new URL(CONFIG.calendarUrl);
-  u.searchParams.set('name', state.contact.name || '');
-  u.searchParams.set('email', state.contact.email || '');
-  u.searchParams.set('a1', state.contact.phone || '');
-  return u.toString();
+  return new URL(CONFIG.calendarUrl).toString();
 }
 
 function wireResult(d) {
@@ -1064,7 +1065,6 @@ function wireResult(d) {
         const link = calendarLink();
         if (link) { b.textContent = 'Opening the calendar\u2026'; setTimeout(() => { location.href = link; }, 250); }
         else if (preview) { b.textContent = 'Preview: opening the confirmation page\u2026'; setTimeout(() => { location.href = thankYou('call'); }, 250); }
-        else say('<p>The booking calendar will open here once it is connected.</p>');
       });
     });
   }
