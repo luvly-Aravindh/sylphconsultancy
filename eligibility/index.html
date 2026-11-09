@@ -949,11 +949,10 @@ function result() {
 
   submitLead(leadFields).then(res => {
     if (window.console) console.log('[Getnos Desk] Lead submitted:', res);
-    // Lead saved: send the buyer on to this page's TidyCal booking page.
-    // A skipped call means another submit is already in flight, and that one redirects.
+    // Lead saved: show this page's TidyCal booking page as a button on the result screen.
+    // A skipped call means another submit is already in flight, and that one shows the button.
     if (res && res.skipped) return;
-    const link = calendarLink();
-    if (link) location.assign(link);
+    showMeetingButton();
   }).catch(err => {
     if (window.console) console.warn('[Getnos Desk] Lead submit error:', err);
   });
@@ -1027,6 +1026,29 @@ function calendarLink() {
   if (state.contact.name) u.searchParams.set('name', state.contact.name);
   if (state.contact.email) u.searchParams.set('email', state.contact.email);
   return u.toString();
+}
+
+/* After the lead is saved: a button to this page's TidyCal booking page. The call route already
+   has "Book my editorial call", which opens the same page; every other result gets its own button. */
+function showMeetingButton() {
+  const link = calendarLink();
+  if (!link) return;
+  const screen = $('.screen.on', stage);
+  if (!screen || $('[data-call]', screen)) return;
+  if ($('[data-meeting]', screen)) return;
+  let actions = $('.actions', screen);
+  if (!actions) {
+    actions = document.createElement('div'); actions.className = 'actions';
+    const after = $('#after', screen);
+    screen.insertBefore(actions, after || null);
+  }
+  const a = document.createElement('a');
+  a.className = $('.btn', actions) ? 'btn quiet' : 'btn';
+  a.href = link;
+  a.setAttribute('data-meeting', '');
+  a.textContent = 'Book a 30-minute meeting';
+  a.addEventListener('click', () => { send('call_click', { package: (state.result || {}).rec || '' }); track('call_click'); });
+  actions.appendChild(a);
 }
 
 function wireResult(d) {
