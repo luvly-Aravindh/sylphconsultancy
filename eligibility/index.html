@@ -152,7 +152,7 @@
   /* Plate: the right page */
   .plate-page { background: var(--ink); padding: 0; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; overflow: hidden; }
   .plate { flex: 1; position: relative; overflow: hidden; background: var(--ink); }
-  .plate > * { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .6s var(--ease); }
+  .plate > * { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity .6s var(--ease); }
   .plate svg { display: block; }
   .plate > img { object-position: center 28%; background: var(--ink); }
   .caption { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 170px clamp(28px, 4vw, 56px) 34px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; color: var(--paper); background: linear-gradient(to top, rgba(0,0,0,.94) 0%, rgba(0,0,0,.82) 38%, rgba(0,0,0,.4) 70%, rgba(0,0,0,0)); pointer-events: none; }
@@ -314,7 +314,7 @@ const CONFIG = {
   gallery: {
     covers:     ['covers/sarita-handa', 'covers/kathgodown', 'covers/progetto', 'covers/lumiere', 'covers/triveni', 'covers/mia-cara', 'covers/dvinity', 'covers/jb-marble', 'table/stack', 'covers/outdoor-connections'],
     architects: [],
-    brands:     ['covers/sarita-handa', 'brands/sarita-handa-bed', 'covers/kathgodown', 'covers/progetto', 'brands/lumiere-founders', 'brands/progetto-chairs', 'covers/triveni', 'brands/mia-cara-table', 'brands/jb-fireplace', 'covers/dvinity', 'brands/argmac-foosball', 'covers/mia-cara', 'brands/lumiere-lights'],
+    brands:     ['flow/1', 'flow/2', 'flow/3', 'flow/4', 'flow/5', 'flow/6', 'flow/7', 'flow/8', 'flow/9', 'flow/10'],
     developers: []
   },
   // Clean photographs (no magazine text) used for the buyer's own cover or feature preview at the end.
@@ -372,7 +372,7 @@ const DOES = {
     "annual": "The Annual Programme keeps your brand in front of the people who specify, edition after edition, all year."
   },
   "developer": {
-    "quarter": "A quarter page puts your project in front of 80,000+ UHNI and HNI readers, and gives your sales team “As featured in Sylph”.",
+    "quarter": "A quarter page puts your project in front of 1,60,000+ UHNI and HNI readers, and gives your sales team “As featured in Sylph”.",
     "half": "A half page gives your project room for the story behind it, and gives your sales team “As featured in Sylph”.",
     "feature": "A full-page feature tells one project’s story: the design, the craftsmanship and the thinking behind it, in an editor’s voice.",
     "cover": "A cover, timed to your launch, puts your project on one of only four Sylph covers a month: a credential for your sales team from day one.",
@@ -389,7 +389,7 @@ Object.keys(PACKAGES).forEach(k => { PACKAGES[k].key = k; });
    ============================================================ */
 const FACTS = {
   intro: '7,000+ brands featured since 2021.',
-  contact: '60,000 to 70,000 copies a year, hand-delivered to UHNI and HNI homes.',
+  contact: '75,000+ print copies a year, hand-delivered to UHNI and HNI homes.',
   type: 'Sylph features the people who design, build and furnish India’s finest homes.',
   architect: 'Read in the homes of the clients you want to work with next.',
   brand: 'Seen by UHNI and HNI homeowners, and by the architects who choose what goes into their homes.',

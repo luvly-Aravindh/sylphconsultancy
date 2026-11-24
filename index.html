@@ -31,7 +31,7 @@ em.it{font-family:var(--ital);font-style:italic;font-weight:500;letter-spacing:-
 .eyebrow:before{content:"";width:7px;height:7px;background:var(--gold);transform:rotate(45deg)}
 .dark .eyebrow{color:var(--gold-hi)}
 .ph{position:relative;overflow:hidden;background:#111}
-.ph>svg,.ph>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph>svg,.ph>img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .ph>img{animation:fade .7s var(--ease)}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 html.rv [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
@@ -69,13 +69,14 @@ html.rv [data-reveal].in{opacity:1;transform:none}
 .hero h1{font-size:clamp(32px,4.6vw,62px);line-height:1.08;max-width:1020px;margin:0 auto 18px}
 .hero h1 em.it{color:var(--oxblood)}
 .sub{font-size:clamp(17px,1.45vw,19.5px);line-height:1.55;color:#3d3933;max-width:640px;margin:0 auto 26px;text-wrap:balance}
-.collage{padding-top:44px;display:grid;grid-template-columns:1fr 1fr 1.3fr 1fr 1fr;gap:12px;align-items:end}
-.collage .ph{aspect-ratio:3/3.7;border:6px solid #fff;box-shadow:0 24px 40px -22px rgba(0,0,0,.55)}
-.collage .ph.c{aspect-ratio:1080/1340}
-.collage .ph:nth-child(1){transform:rotate(-3deg)}
-.collage .ph:nth-child(2){transform:rotate(1.5deg) translateY(-12px)}
-.collage .ph:nth-child(4){transform:rotate(-1.5deg) translateY(-12px)}
-.collage .ph:nth-child(5){transform:rotate(3deg)}
+/* New cover row for the top of the Brands page */
+.covers{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;align-items:center;padding:56px 0 8px;position:relative}
+.covers .cv{margin:0;position:relative;aspect-ratio:1080/1330;border-radius:2px;overflow:hidden;background:#1b1b1b;box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 30px 46px -24px rgba(0,0,0,.7),0 6px 14px -6px rgba(0,0,0,.35);transition:transform .35s ease}
+.covers .cv img{width:100%;height:100%;object-fit:contain;display:block}
+.covers .cv:nth-child(2),.covers .cv:nth-child(4){transform:scale(1.05)}
+.covers .cv.mid{transform:scale(1.13);z-index:2;box-shadow:0 40px 60px -24px rgba(0,0,0,.8),0 8px 18px -6px rgba(0,0,0,.4)}
+@media (hover:hover){.covers .cv:hover{transform:translateY(-6px) scale(1.06)}.covers .cv.mid:hover{transform:translateY(-6px) scale(1.15)}}
+.stage .cap{text-align:center;margin-top:30px}
 .vframe{position:relative;aspect-ratio:16/9;background:#000;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);border:6px solid #fff}
 .vframe iframe,.vframe video{position:absolute;inset:0;width:100%;height:100%;border:0}
 #vsl.has-video{max-width:960px;margin:0 auto;padding-top:44px}
@@ -96,7 +97,7 @@ section.sec{padding:92px 0}
 .head{margin-bottom:48px}
 .pains{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
 .pain{background:#fff;border:1px solid var(--rule);display:flex;flex-direction:column}
-.pain .ph{aspect-ratio:4/3}
+.pain .ph{aspect-ratio:4/5}
 .pain .bd{padding:22px 24px 26px;border-top:5px solid var(--c)}
 .pain .n{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--c);color:#fff;font-family:var(--display);font-size:15px;margin-bottom:12px}
 .pain h3{font-size:24px;line-height:1.22;margin-bottom:10px}
@@ -229,9 +230,10 @@ body{font-size:16.5px}
 .cta .m{font-size:12px}
 .cta .ar{display:none}
 .after{font-size:13.5px}
-.collage{grid-template-columns:1fr 1.3fr 1fr;gap:8px;padding-top:30px}
-.collage .ph{border-width:4px}
-.collage .x{display:none}
+.covers{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding:30px 21% 18px;margin:0 -16px;scrollbar-width:none}
+.covers::-webkit-scrollbar{display:none}
+.covers .cv,.covers .cv.mid,.covers .cv:nth-child(2),.covers .cv:nth-child(4){flex:0 0 58%;transform:none;scroll-snap-align:center}
+header.hero .logo{font-size:20px;letter-spacing:.3em;margin-right:-.3em;white-space:nowrap}
 .stage .cap{padding:12px 0 30px}
 .marq{padding:13px 0}.marq .it{padding:0 18px;font-size:11px}.marq .it b{font-size:22px}.marq .it:after{margin-left:18px}
 section.sec{padding:62px 0}
@@ -325,7 +327,7 @@ section.soft{background:var(--soft)}
 
 <div class="band" role="note" aria-label="About Sylph">
   <div class="rot" data-rotate>
-    <span><b>60,000+ copies</b> a year, hand-delivered to UHNI and HNI homes</span>
+    <span><b>75,000+ copies</b> a year, hand-delivered to UHNI and HNI homes</span>
     <span>Only <b>four covers</b> a month. One per edition</span>
     <span>Fixed prices. <b>No agents.</b> No commission on top</span>
     <span>Be the brand the architect <b>already knows</b></span>
@@ -337,10 +339,10 @@ section.soft{background:var(--soft)}
 
 <header class="hero">
   <div class="wrap">
-    <a class="logo" href="#top" id="top" aria-label="Sylph" data-logo>SYLPH</a><br>
-    <span class="pill"><i></i>For furniture, lighting and decor brands</span>
+    <a class="logo" href="#top" id="top" aria-label="Sylph Consultancy" data-logo>SYLPH CONSULTANCY</a><br>
+    <span class="pill"><i></i>For furniture, lighting, materials and decor brands</span>
     <h1>An Architect Just Picked the Lights for a Billionaire&rsquo;s Home. <em class="it">It Wasn&rsquo;t Your&nbsp;Brand.</em></h1>
-    <p class="sub">Not because yours is worse. Because they had never seen it. Here&rsquo;s how the brands that win get seen first, and how to check if yours qualifies in 2&nbsp;minutes.</p>
+    <p class="sub">Not because your work lacks quality or luxury. Simply because they haven&rsquo;t seen it. Here&rsquo;s how leading brands capture prime visibility, and how to check your eligibility in 2&nbsp;minutes.</p>
     <div class="ctaw">
       <a class="cta" data-cta="hero" href="eligibility/?type=brand"><span class="tx"><span class="t" data-oneline>Check my brand&rsquo;s eligibility</span><span class="m" data-oneline>Free 2-minute check &middot; See your fixed price</span></span><span class="ar" aria-hidden="true">&#8599;</span></a>
       <p class="slots" data-slots></p>
@@ -350,30 +352,30 @@ section.soft{background:var(--soft)}
 <div class="stage">
   <div class="wrap">
     <div id="vsl" data-vsl>
-      <div class="collage">
-        <div class="ph x" data-img="table/sarita-handa-hardcopy" data-art="lamp" data-alt="Sarita Handa in Sylph, on the coffee table" data-sizes="(max-width: 640px) 30vw, 230px" data-st><img src="assets/table/sarita-handa-hardcopy.webp" srcset="assets/table/sarita-handa-hardcopy-s.webp 560w, assets/table/sarita-handa-hardcopy-m.webp 820w, assets/table/sarita-handa-hardcopy.webp 1080w" sizes="(max-width: 640px) 30vw, 230px" alt="Sarita Handa in Sylph, on the coffee table" loading="lazy" decoding="async" onerror="this.remove()"></div>
-        <div class="ph" data-img="brands/lumiere-founders" data-art="table" data-alt="The Lumiere by Imperial founders in their showroom, in Sylph" data-sizes="(max-width: 640px) 30vw, 230px" data-eager data-st><img src="assets/brands/lumiere-founders.webp" srcset="assets/brands/lumiere-founders-s.webp 560w, assets/brands/lumiere-founders-m.webp 820w, assets/brands/lumiere-founders.webp 1080w" sizes="(max-width: 640px) 30vw, 230px" alt="The Lumiere by Imperial founders in their showroom, in Sylph" loading="eager" fetchpriority="high" decoding="async" onerror="this.remove()"></div>
-        <div class="ph c" data-img="covers/dvinity" data-art="cover" data-alt="Kavita Chopra of D&rsquo;Vinity on the cover of Sylph" data-sizes="(max-width: 640px) 40vw, 300px" data-eager data-st><img src="assets/covers/dvinity.webp" srcset="assets/covers/dvinity-s.webp 560w, assets/covers/dvinity-m.webp 820w, assets/covers/dvinity.webp 1080w" sizes="(max-width: 640px) 40vw, 300px" alt="Kavita Chopra of D&rsquo;Vinity on the cover of Sylph" loading="eager" fetchpriority="high" decoding="async" onerror="this.remove()"></div>
-        <div class="ph" data-img="covers/outdoor-connections" data-art="vase" data-alt="Tejesh Todi of Outdoor Connections on the cover of Sylph" data-sizes="(max-width: 640px) 30vw, 230px" data-eager data-st><img src="assets/covers/outdoor-connections.webp" srcset="assets/covers/outdoor-connections-s.webp 560w, assets/covers/outdoor-connections-m.webp 820w, assets/covers/outdoor-connections.webp 1080w" sizes="(max-width: 640px) 30vw, 230px" alt="Tejesh Todi of Outdoor Connections on the cover of Sylph" loading="eager" fetchpriority="high" decoding="async" onerror="this.remove()"></div>
-        <div class="ph x" data-img="table/czar-homes-hardcopy" data-art="window" data-alt="Czar Homes in Sylph, on the coffee table" data-sizes="(max-width: 640px) 30vw, 230px" data-st><img src="assets/table/czar-homes-hardcopy.webp" srcset="assets/table/czar-homes-hardcopy-s.webp 560w, assets/table/czar-homes-hardcopy-m.webp 820w, assets/table/czar-homes-hardcopy.webp 1080w" sizes="(max-width: 640px) 30vw, 230px" alt="Czar Homes in Sylph, on the coffee table" loading="lazy" decoding="async" onerror="this.remove()"></div>
+      <div class="covers">
+        <figure class="cv"><img src="assets/covers/mia-cara.webp" srcset="assets/covers/mia-cara-s.webp 560w, assets/covers/mia-cara-m.webp 820w, assets/covers/mia-cara.webp 1080w" sizes="(max-width: 640px) 58vw, 240px" width="1080" height="1330" alt="Meher Sethi of Mia Cara on the cover of Sylph" loading="eager" decoding="async"></figure>
+        <figure class="cv"><img src="assets/covers/essentia-chawla.webp" srcset="assets/covers/essentia-chawla-s.webp 560w, assets/covers/essentia-chawla-m.webp 820w, assets/covers/essentia-chawla.webp 1080w" sizes="(max-width: 640px) 58vw, 240px" width="1080" height="1330" alt="Hardesh and Monica Chawla of Essentia on the cover of Sylph" loading="eager" decoding="async"></figure>
+        <figure class="cv mid"><img src="assets/covers/beyond-designs.webp" srcset="assets/covers/beyond-designs-s.webp 560w, assets/covers/beyond-designs-m.webp 820w, assets/covers/beyond-designs.webp 1080w" sizes="(max-width: 640px) 58vw, 240px" width="1080" height="1330" alt="Sachin and Neha Gupta of Beyond Designs on the cover of Sylph" loading="eager" fetchpriority="high" decoding="async"></figure>
+        <figure class="cv"><img src="assets/covers/sarita-handa-interview.webp" srcset="assets/covers/sarita-handa-interview-s.webp 560w, assets/covers/sarita-handa-interview-m.webp 820w, assets/covers/sarita-handa-interview.webp 1080w" sizes="(max-width: 640px) 58vw, 240px" width="1080" height="1330" alt="Sarita Handa on the cover of Sylph" loading="eager" decoding="async"></figure>
+        <figure class="cv"><img src="assets/covers/amathyst.webp" srcset="assets/covers/amathyst-s.webp 560w, assets/covers/amathyst-m.webp 820w, assets/covers/amathyst.webp 1080w" sizes="(max-width: 640px) 58vw, 240px" width="1080" height="1330" alt="Varun Diwan of Amathyst on the cover of Sylph" loading="eager" decoding="async"></figure>
       </div>
     </div>
-    <p class="cap">From recent editions of Sylph: Sarita Handa, Lumiere by Imperial, D&rsquo;Vinity, Outdoor Connections and Czar Homes.</p>
+    <p class="cap">From recent editions of Sylph: Mia Cara by Meher Sethi, Hardesh and Monica Chawla of Essentia, Sachin and Neha Gupta of Beyond Designs, Sarita Handa, and Amathyst by Varun Diwan.</p>
   </div>
 </div>
 
 <div class="marq" aria-label="Sylph in numbers"><div class="track" data-marquee>
-  <div class="it"><b>48</b>Editions a year</div><div class="it"><b>60,000+</b>Copies a year</div><div class="it"><b>80,000+</b>UHNI and HNI readers</div><div class="it"><b>400</b>Pages each</div><div class="it"><b>4</b>Covers a month</div><div class="it"><b>7,000+</b>Brands since 2021</div><div class="it"><b>Private</b>Circulation</div><div class="it"><b>Fixed</b>Prices</div><div class="it"><b>No</b>Agents</div><div class="it"><b>3M+</b>Instagram views a month</div><div class="it"><b>100%</b>Publishing guaranteed</div>
+  <div class="it"><b>48</b>Editions a year</div><div class="it"><b>75,000+</b>Copies a year</div><div class="it"><b>1,60,000+</b>UHNI and HNI readers</div><div class="it"><b>Up to 400</b>Pages in a Legacy Book</div><div class="it"><b>4</b>Covers a month</div><div class="it"><b>7,000+</b>Brands since 2021</div><div class="it"><b>Private</b>Circulation</div><div class="it"><b>Fixed</b>Prices</div><div class="it"><b>No</b>Agents</div><div class="it"><b>3M+</b>Instagram views a month</div><div class="it"><b>100%</b>Publishing guaranteed</div>
 </div></div>
 
 <main>
   <section class="sec">
     <div class="wrap">
-      <div class="head center" data-reveal><h2>Where Your Best Orders Are Quietly&nbsp;Going</h2><p class="intro">If any of these sound familiar, keep reading. If none of them do, you probably don&rsquo;t need us.</p></div>
+      <div class="head center" data-reveal><h2>Where Your Best Orders Are Quietly&nbsp;Going</h2><p class="intro">If even one of these feels familiar, keep reading. If none of them do, you don&rsquo;t need us.</p></div>
       <div class="pains">
-        <article class="pain" style="--c:var(--emerald)" data-reveal><div class="ph" data-img="brands/isha-arora-bedroom" data-art="lamp" data-alt="Chandeliers in a bedroom by Isha Arora Designs, in Sylph" data-st><img src="assets/brands/isha-arora-bedroom.webp" srcset="assets/brands/isha-arora-bedroom-s.webp 560w, assets/brands/isha-arora-bedroom-m.webp 820w, assets/brands/isha-arora-bedroom.webp 1080w" sizes="(max-width: 640px) 50vw, 320px" alt="Chandeliers in a bedroom by Isha Arora Designs, in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="bd"><span class="n">1</span><h3>The order you never heard&nbsp;about</h3><p>An architect picked the lights for a client&rsquo;s farmhouse last month. You never got a call. You never even knew it happened.</p></div></article>
-        <article class="pain" style="--c:var(--oxblood)" data-reveal><div class="ph" data-img="brands/progetto-living" data-art="table" data-alt="A Progetto living room in Sylph" data-pos="center 90%" data-st><img src="assets/brands/progetto-living.webp" srcset="assets/brands/progetto-living-s.webp 560w, assets/brands/progetto-living-m.webp 820w, assets/brands/progetto-living.webp 1080w" sizes="(max-width: 640px) 50vw, 320px" alt="A Progetto living room in Sylph" loading="lazy" decoding="async" style="object-position:center 90%" onerror="this.remove()"></div><div class="bd"><span class="n">2</span><h3>The &ldquo;price list?&rdquo; message</h3><p>Your ads bring messages. &ldquo;Price list?&rdquo; Then silence. The people who pay your prices never saw the ad.</p></div></article>
-        <article class="pain" style="--c:var(--sapphire)" data-reveal><div class="ph" data-img="brands/triveni-showroom" data-art="vase" data-alt="Inside the Triveni showroom, in Sylph" data-pos="center 25%" data-st><img src="assets/brands/triveni-showroom.webp" srcset="assets/brands/triveni-showroom-s.webp 560w, assets/brands/triveni-showroom-m.webp 820w, assets/brands/triveni-showroom.webp 1080w" sizes="(max-width: 640px) 50vw, 320px" alt="Inside the Triveni showroom, in Sylph" loading="lazy" decoding="async" style="object-position:center 25%" onerror="this.remove()"></div><div class="bd"><span class="n">3</span><h3>The stall that went home on&nbsp;Monday</h3><p>You paid for the stall, shipped the pieces and smiled for four days. On Monday it was packed up. So was the attention.</p></div></article>
+        <article class="pain" style="--c:var(--emerald)" data-reveal><div class="ph" data-img="brands/beyond-designs-vignette" data-art="lamp" data-alt="A Beyond Designs interior, as featured in Sylph" data-st><img src="assets/brands/beyond-designs-vignette.webp" srcset="assets/brands/beyond-designs-vignette-s.webp 560w, assets/brands/beyond-designs-vignette-m.webp 820w, assets/brands/beyond-designs-vignette.webp 1080w" sizes="(max-width: 640px) 50vw, 320px" alt="A Beyond Designs interior, as featured in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="bd"><span class="n">1</span><h3>The order you never heard&nbsp;about</h3><p>Last month, an architect finalised the lighting for a luxury farmhouse. You didn&rsquo;t lose the pitch. You weren&rsquo;t even in the room.</p></div></article>
+        <article class="pain" style="--c:var(--oxblood)" data-reveal><div class="ph" data-img="covers/ali-baldiwala" data-art="table" data-alt="Ali Baldiwala on the cover of Sylph" data-pos="center top" data-st><img src="assets/covers/ali-baldiwala.webp" srcset="assets/covers/ali-baldiwala-s.webp 560w, assets/covers/ali-baldiwala-m.webp 820w, assets/covers/ali-baldiwala.webp 1080w" sizes="(max-width: 640px) 50vw, 320px" alt="Ali Baldiwala on the cover of Sylph" loading="lazy" decoding="async" style="object-position:center top" onerror="this.remove()"></div><div class="bd"><span class="n">2</span><h3>The &ldquo;price list?&rdquo; ghost</h3><p>Your ads bring endless DMs asking &ldquo;Price list?&rdquo;, then total silence. Meanwhile, the buyers who don&rsquo;t blink at your prices never even see the ad.</p></div></article>
+        <article class="pain" style="--c:var(--sapphire)" data-reveal><div class="ph" data-img="brands/beyond-designs-library" data-art="vase" data-alt="A Beyond Designs library, as featured in Sylph" data-st><img src="assets/brands/beyond-designs-library.webp" srcset="assets/brands/beyond-designs-library-s.webp 560w, assets/brands/beyond-designs-library-m.webp 820w, assets/brands/beyond-designs-library.webp 1080w" sizes="(max-width: 640px) 50vw, 320px" alt="A Beyond Designs library, as featured in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="bd"><span class="n">3</span><h3>The stall that went home on&nbsp;Monday</h3><p>You paid for the stall, shipped your heaviest pieces and paid a fortune in logistics, just to smile for four days. By Monday, everything was back in boxes. So was your return.</p></div></article>
       </div>
       <div class="ctaw mt"><a class="cta" data-cta="pains" href="eligibility/?type=brand"><span class="tx"><span class="t" data-oneline>Check my brand&rsquo;s eligibility</span><span class="m" data-oneline>Free 2-minute check &middot; See your fixed price</span></span><span class="ar" aria-hidden="true">&#8599;</span></a><p class="slots" data-slots></p></div>
     </div>
@@ -381,19 +383,19 @@ section.soft{background:var(--soft)}
 
   <section class="sec truth dark">
     <div class="wrap center" data-reveal>
-      <p class="big">Architects don&rsquo;t pick the best brand. <mark>They pick the one they remember.</mark></p>
-      <p class="intro">And they remember what they keep seeing in the right places. A 400-page magazine on a UHNI family&rsquo;s coffee table is one of those places. A sponsored post is not.</p>
+      <p class="big">Architects don&rsquo;t always pick the best brand. <mark>They pick the one they remember.</mark></p>
+      <p class="intro">Instagram ads vanish in two seconds, and no architect risks a high-budget project on an unverified brand from a feed. They flip through the physical references on their studio desks. A feature in Sylph means a credible publication has vetted and endorsed your brand.</p>
       <div class="ctaw mt"><a class="cta" data-cta="truth" href="eligibility/?type=brand"><span class="tx"><span class="t" data-oneline>Check my brand&rsquo;s eligibility</span><span class="m" data-oneline>Free 2-minute check &middot; See your fixed price</span></span><span class="ar" aria-hidden="true">&#8599;</span></a><p class="slots" data-slots></p></div>
     </div>
   </section>
 
   <section class="sec" id="work">
     <div class="wrap">
-      <div class="head center" data-reveal><h2>Here&rsquo;s Who&rsquo;s Already on the&nbsp;Table</h2><p class="intro">Real brands. Real covers. Real stories Sylph has published. Here&rsquo;s what was done, and for whom.</p></div>
+      <div class="head center" data-reveal><h2>Here&rsquo;s Who&rsquo;s Already on the&nbsp;Table</h2><p class="intro">Real brands. Real covers. Real stories curated and published by Sylph. Take a look inside our past editions, and the names that trusted us with theirs.</p></div>
       <p class="swipe" aria-hidden="true">Swipe to see all eight &rarr;</p>
       <div class="cases">
         <article class="case" style="--c:var(--plum)" data-reveal>
-          <div class="imgs"><div class="ph" data-img="covers/sarita-handa" data-art="cover" data-alt="Sarita Handa on the cover of Sylph" data-sizes="(max-width: 900px) 46vw, 220px" data-st><img src="assets/covers/sarita-handa.webp" srcset="assets/covers/sarita-handa-s.webp 560w, assets/covers/sarita-handa-m.webp 820w, assets/covers/sarita-handa.webp 1080w" sizes="(max-width: 900px) 46vw, 220px" alt="Sarita Handa on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="brands/sarita-handa-bed" data-art="lamp" data-alt="Sarita Handa, as featured in Sylph" data-sizes="(max-width: 900px) 38vw, 180px" data-st><img src="assets/brands/sarita-handa-bed.webp" srcset="assets/brands/sarita-handa-bed-s.webp 560w, assets/brands/sarita-handa-bed-m.webp 820w, assets/brands/sarita-handa-bed.webp 1080w" sizes="(max-width: 900px) 38vw, 180px" alt="Sarita Handa, as featured in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div></div>
+          <div class="imgs"><div class="ph" data-img="covers/sarita-handa" data-art="cover" data-alt="Sarita Handa on the cover of Sylph" data-sizes="(max-width: 900px) 46vw, 220px" data-st><img src="assets/covers/sarita-handa.webp" srcset="assets/covers/sarita-handa-s.webp 560w, assets/covers/sarita-handa-m.webp 820w, assets/covers/sarita-handa.webp 1080w" sizes="(max-width: 900px) 46vw, 220px" alt="Sarita Handa on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="brands/sarita-handa-feature" data-art="lamp" data-alt="An interior from Sarita Handa&rsquo;s feature in Sylph" data-sizes="(max-width: 900px) 38vw, 180px" data-st><img src="assets/brands/sarita-handa-feature.webp" srcset="assets/brands/sarita-handa-feature-s.webp 560w, assets/brands/sarita-handa-feature-m.webp 820w, assets/brands/sarita-handa-feature.webp 1080w" sizes="(max-width: 900px) 38vw, 180px" alt="An interior from Sarita Handa&rsquo;s feature in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div></div>
           <div class="bd">
             <span class="tag">Luxury home furnishings</span>
             <h3>&ldquo;A Journey Rooted in Craft, Built on&nbsp;Purpose&rdquo;</h3>
@@ -401,7 +403,7 @@ section.soft{background:var(--soft)}
           </div>
         </article>
         <article class="case" style="--c:var(--sapphire)" data-reveal>
-          <div class="imgs"><div class="ph" data-img="covers/kathgodown" data-art="cover" data-alt="The Kathgodown Collector&rsquo;s Edition of Sylph" data-sizes="(max-width: 900px) 46vw, 220px" data-st><img src="assets/covers/kathgodown.webp" srcset="assets/covers/kathgodown-s.webp 560w, assets/covers/kathgodown-m.webp 820w, assets/covers/kathgodown.webp 1080w" sizes="(max-width: 900px) 46vw, 220px" alt="The Kathgodown Collector&rsquo;s Edition of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="brands/kathgodown-living" data-art="lamp" data-alt="A Kathgodown interior, as featured in Sylph" data-sizes="(max-width: 900px) 38vw, 180px" data-st><img src="assets/brands/kathgodown-living.webp" srcset="assets/brands/kathgodown-living-s.webp 560w, assets/brands/kathgodown-living-m.webp 820w, assets/brands/kathgodown-living.webp 1080w" sizes="(max-width: 900px) 38vw, 180px" alt="A Kathgodown interior, as featured in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div></div>
+          <div class="imgs"><div class="ph" data-img="covers/kathgodown" data-art="cover" data-alt="The Kathgodown Collector&rsquo;s Edition of Sylph" data-sizes="(max-width: 900px) 46vw, 220px" data-st><img src="assets/covers/kathgodown.webp" srcset="assets/covers/kathgodown-s.webp 560w, assets/covers/kathgodown-m.webp 820w, assets/covers/kathgodown.webp 1080w" sizes="(max-width: 900px) 46vw, 220px" alt="The Kathgodown Collector&rsquo;s Edition of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="brands/kathgodown-feature" data-art="lamp" data-alt="Kathgodown&rsquo;s feature in Sylph, &ldquo;From Humble Roots to Design Beacon&rdquo;" data-sizes="(max-width: 900px) 38vw, 180px" data-st><img src="assets/brands/kathgodown-feature.webp" srcset="assets/brands/kathgodown-feature-s.webp 560w, assets/brands/kathgodown-feature-m.webp 820w, assets/brands/kathgodown-feature.webp 1080w" sizes="(max-width: 900px) 38vw, 180px" alt="Kathgodown&rsquo;s feature in Sylph, &ldquo;From Humble Roots to Design Beacon&rdquo;" loading="lazy" decoding="async" onerror="this.remove()"></div></div>
           <div class="bd">
             <span class="tag">Bespoke furniture</span>
             <h3>&ldquo;Legacy in Every&nbsp;Grain&rdquo;</h3>
@@ -409,7 +411,7 @@ section.soft{background:var(--soft)}
           </div>
         </article>
         <article class="case" style="--c:var(--emerald)" data-reveal>
-          <div class="imgs"><div class="ph" data-img="covers/progetto" data-art="cover" data-alt="Progetto on the cover of Sylph" data-sizes="(max-width: 900px) 46vw, 220px" data-st><img src="assets/covers/progetto.webp" srcset="assets/covers/progetto-s.webp 560w, assets/covers/progetto-m.webp 820w, assets/covers/progetto.webp 1080w" sizes="(max-width: 900px) 46vw, 220px" alt="Progetto on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="brands/progetto-chairs" data-art="lamp" data-alt="Progetto, as featured in Sylph" data-sizes="(max-width: 900px) 38vw, 180px" data-st><img src="assets/brands/progetto-chairs.webp" srcset="assets/brands/progetto-chairs-s.webp 560w, assets/brands/progetto-chairs-m.webp 820w, assets/brands/progetto-chairs.webp 1080w" sizes="(max-width: 900px) 38vw, 180px" alt="Progetto, as featured in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div></div>
+          <div class="imgs"><div class="ph" data-img="covers/progetto" data-art="cover" data-alt="Progetto on the cover of Sylph" data-sizes="(max-width: 900px) 46vw, 220px" data-st><img src="assets/covers/progetto.webp" srcset="assets/covers/progetto-s.webp 560w, assets/covers/progetto-m.webp 820w, assets/covers/progetto.webp 1080w" sizes="(max-width: 900px) 46vw, 220px" alt="Progetto on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="brands/progetto-feature" data-art="lamp" data-alt="Progetto&rsquo;s feature in Sylph" data-sizes="(max-width: 900px) 38vw, 180px" data-st><img src="assets/brands/progetto-feature.webp" srcset="assets/brands/progetto-feature-s.webp 560w, assets/brands/progetto-feature-m.webp 820w, assets/brands/progetto-feature.webp 1080w" sizes="(max-width: 900px) 38vw, 180px" alt="Progetto&rsquo;s feature in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div></div>
           <div class="bd">
             <span class="tag">Kolkata &middot; Italian furniture</span>
             <h3>&ldquo;The Italian Supremacy of Progetto&rdquo;</h3>
@@ -417,7 +419,7 @@ section.soft{background:var(--soft)}
           </div>
         </article>
         <article class="case" style="--c:var(--oxblood)" data-reveal>
-          <div class="imgs"><div class="ph" data-img="covers/lumiere" data-art="cover" data-alt="Lumiere by Imperial on the cover of Sylph" data-sizes="(max-width: 900px) 46vw, 220px" data-st><img src="assets/covers/lumiere.webp" srcset="assets/covers/lumiere-s.webp 560w, assets/covers/lumiere-m.webp 820w, assets/covers/lumiere.webp 1080w" sizes="(max-width: 900px) 46vw, 220px" alt="Lumiere by Imperial on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="brands/lumiere-lights" data-art="lamp" data-alt="Lumiere by Imperial, as featured in Sylph" data-sizes="(max-width: 900px) 38vw, 180px" data-st><img src="assets/brands/lumiere-lights.webp" srcset="assets/brands/lumiere-lights-s.webp 560w, assets/brands/lumiere-lights-m.webp 820w, assets/brands/lumiere-lights.webp 1080w" sizes="(max-width: 900px) 38vw, 180px" alt="Lumiere by Imperial, as featured in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div></div>
+          <div class="imgs"><div class="ph" data-img="covers/lumiere" data-art="cover" data-alt="Lumiere by Imperial on the cover of Sylph" data-sizes="(max-width: 900px) 46vw, 220px" data-st><img src="assets/covers/lumiere.webp" srcset="assets/covers/lumiere-s.webp 560w, assets/covers/lumiere-m.webp 820w, assets/covers/lumiere.webp 1080w" sizes="(max-width: 900px) 46vw, 220px" alt="Lumiere by Imperial on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="brands/lumiere-feature" data-art="lamp" data-alt="Lumiere by Imperial&rsquo;s founders in their lighting showroom, in Sylph" data-sizes="(max-width: 900px) 38vw, 180px" data-st><img src="assets/brands/lumiere-feature.webp" srcset="assets/brands/lumiere-feature-s.webp 560w, assets/brands/lumiere-feature-m.webp 820w, assets/brands/lumiere-feature.webp 1080w" sizes="(max-width: 900px) 38vw, 180px" alt="Lumiere by Imperial&rsquo;s founders in their lighting showroom, in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div></div>
           <div class="bd">
             <span class="tag">Lighting &middot; Six decades of craft</span>
             <h3>&ldquo;The Power of Light&rdquo;</h3>
@@ -425,7 +427,7 @@ section.soft{background:var(--soft)}
           </div>
         </article>
         <article class="case" style="--c:var(--plum)" data-reveal>
-          <div class="imgs"><div class="ph" data-img="covers/triveni" data-art="cover" data-alt="Triveni The Granite Studio on the cover of Sylph" data-sizes="(max-width: 900px) 46vw, 220px" data-st><img src="assets/covers/triveni.webp" srcset="assets/covers/triveni-s.webp 560w, assets/covers/triveni-m.webp 820w, assets/covers/triveni.webp 1080w" sizes="(max-width: 900px) 46vw, 220px" alt="Triveni The Granite Studio on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="brands/triveni-slabs" data-art="lamp" data-alt="Triveni The Granite Studio, as featured in Sylph" data-sizes="(max-width: 900px) 38vw, 180px" data-st><img src="assets/brands/triveni-slabs.webp" srcset="assets/brands/triveni-slabs-s.webp 560w, assets/brands/triveni-slabs-m.webp 820w, assets/brands/triveni-slabs.webp 1080w" sizes="(max-width: 900px) 38vw, 180px" alt="Triveni The Granite Studio, as featured in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div></div>
+          <div class="imgs"><div class="ph" data-img="covers/triveni" data-art="cover" data-alt="Triveni The Granite Studio on the cover of Sylph" data-sizes="(max-width: 900px) 46vw, 220px" data-st><img src="assets/covers/triveni.webp" srcset="assets/covers/triveni-s.webp 560w, assets/covers/triveni-m.webp 820w, assets/covers/triveni.webp 1080w" sizes="(max-width: 900px) 46vw, 220px" alt="Triveni The Granite Studio on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="brands/triveni-feature" data-art="lamp" data-alt="Triveni The Granite Studio&rsquo;s showroom, in Sylph" data-sizes="(max-width: 900px) 38vw, 180px" data-st><img src="assets/brands/triveni-feature.webp" srcset="assets/brands/triveni-feature-s.webp 560w, assets/brands/triveni-feature-m.webp 820w, assets/brands/triveni-feature.webp 1080w" sizes="(max-width: 900px) 38vw, 180px" alt="Triveni The Granite Studio&rsquo;s showroom, in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div></div>
           <div class="bd">
             <span class="tag">Premium surfaces</span>
             <h3>&ldquo;Founders of&nbsp;Excellence&rdquo;</h3>
@@ -441,7 +443,7 @@ section.soft{background:var(--soft)}
           </div>
         </article>
         <article class="case" style="--c:var(--emerald)" data-reveal>
-          <div class="imgs"><div class="ph" data-img="table/czar-homes-hardcopy" data-art="cover" data-alt="Czar Homes on the cover of Sylph" data-sizes="(max-width: 900px) 46vw, 220px" data-st><img src="assets/table/czar-homes-hardcopy.webp" srcset="assets/table/czar-homes-hardcopy-s.webp 560w, assets/table/czar-homes-hardcopy-m.webp 820w, assets/table/czar-homes-hardcopy.webp 1080w" sizes="(max-width: 900px) 46vw, 220px" alt="Czar Homes on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="table/czar-homes-desk" data-art="lamp" data-alt="Czar Homes, as featured in Sylph" data-sizes="(max-width: 900px) 38vw, 180px" data-st><img src="assets/table/czar-homes-desk.webp" srcset="assets/table/czar-homes-desk-s.webp 560w, assets/table/czar-homes-desk-m.webp 820w, assets/table/czar-homes-desk.webp 1080w" sizes="(max-width: 900px) 38vw, 180px" alt="Czar Homes, as featured in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div></div>
+          <div class="imgs"><div class="ph" data-img="covers/czar-homes" data-art="cover" data-alt="The founders of Czar Homes on the cover of Sylph" data-sizes="(max-width: 900px) 46vw, 220px" data-st><img src="assets/covers/czar-homes.webp" srcset="assets/covers/czar-homes-s.webp 560w, assets/covers/czar-homes-m.webp 820w, assets/covers/czar-homes.webp 1080w" sizes="(max-width: 900px) 46vw, 220px" alt="The founders of Czar Homes on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="brands/czar-homes-feature" data-art="lamp" data-alt="A dining room from Czar Homes&rsquo; feature in Sylph" data-sizes="(max-width: 900px) 38vw, 180px" data-st><img src="assets/brands/czar-homes-feature.webp" srcset="assets/brands/czar-homes-feature-s.webp 560w, assets/brands/czar-homes-feature-m.webp 820w, assets/brands/czar-homes-feature.webp 1080w" sizes="(max-width: 900px) 38vw, 180px" alt="A dining room from Czar Homes&rsquo; feature in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div></div>
           <div class="bd">
             <span class="tag">Bespoke luxury furniture</span>
             <h3>&ldquo;The Art and Science of Luxury&nbsp;Furniture&rdquo;</h3>
@@ -449,7 +451,7 @@ section.soft{background:var(--soft)}
           </div>
         </article>
         <article class="case" style="--c:var(--emerald)" data-reveal>
-          <div class="imgs"><div class="ph" data-img="covers/argmac" data-art="cover" data-alt="Akshay Choudhary and Aditya Sardana of Argmac on the cover of Sylph" data-sizes="(max-width: 900px) 46vw, 220px" data-st><img src="assets/covers/argmac.webp" srcset="assets/covers/argmac-s.webp 560w, assets/covers/argmac-m.webp 820w, assets/covers/argmac.webp 1080w" sizes="(max-width: 900px) 46vw, 220px" alt="Akshay Choudhary and Aditya Sardana of Argmac on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="brands/argmac-gameroom" data-art="lamp" data-alt="Argmac, as featured in Sylph" data-sizes="(max-width: 900px) 38vw, 180px" data-st><img src="assets/brands/argmac-gameroom.webp" srcset="assets/brands/argmac-gameroom-s.webp 560w, assets/brands/argmac-gameroom-m.webp 820w, assets/brands/argmac-gameroom.webp 1080w" sizes="(max-width: 900px) 38vw, 180px" alt="Argmac, as featured in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div></div>
+          <div class="imgs"><div class="ph" data-img="covers/argmac" data-art="cover" data-alt="Akshay Choudhary and Aditya Sardana of Argmac on the cover of Sylph" data-sizes="(max-width: 900px) 46vw, 220px" data-st><img src="assets/covers/argmac.webp" srcset="assets/covers/argmac-s.webp 560w, assets/covers/argmac-m.webp 820w, assets/covers/argmac.webp 1080w" sizes="(max-width: 900px) 46vw, 220px" alt="Akshay Choudhary and Aditya Sardana of Argmac on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="brands/argmac-feature" data-art="lamp" data-alt="An Argmac gaming table, from its feature in Sylph" data-sizes="(max-width: 900px) 38vw, 180px" data-st><img src="assets/brands/argmac-feature.webp" srcset="assets/brands/argmac-feature-s.webp 560w, assets/brands/argmac-feature-m.webp 820w, assets/brands/argmac-feature.webp 1080w" sizes="(max-width: 900px) 38vw, 180px" alt="An Argmac gaming table, from its feature in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div></div>
           <div class="bd">
             <span class="tag">Luxury leisure furniture</span>
             <h3>&ldquo;Redefining Luxury Leisure&rdquo;</h3>
@@ -458,14 +460,14 @@ section.soft{background:var(--soft)}
         </article>
       </div>
       <div class="tstrip" data-reveal>
-        <div class="center"><p class="eyebrow">On the coffee table</p><h3>Real Sylph hard copies, on real tables.</h3></div>
+        <div class="center"><p class="eyebrow">Why print still wins in an ultra-luxury world</p><h3>Digital gets you seen. Print makes you unforgettable.</h3><p class="intro">A PDF link gets closed in three seconds. A luxury edition stays in the room for months, in UHNI lounges, private residences and top architecture studios. With Sylph you get both: the digital issue travels fast, and the print edition puts your brand in the buyer&rsquo;s hands.</p></div>
         <div class="tstrip-row">
-          <figure><div class="ph" data-img="table/sarita-handa-hardcopy" data-art="table" data-alt="Sarita Handa in Sylph, on the coffee table" data-sizes="(max-width: 640px) 92vw, 380px" data-st><img src="assets/table/sarita-handa-hardcopy.webp" srcset="assets/table/sarita-handa-hardcopy-s.webp 560w, assets/table/sarita-handa-hardcopy-m.webp 820w, assets/table/sarita-handa-hardcopy.webp 1080w" sizes="(max-width: 640px) 92vw, 380px" alt="Sarita Handa in Sylph, on the coffee table" loading="lazy" decoding="async" onerror="this.remove()"></div><figcaption>Sarita Handa in Sylph, on the coffee table.</figcaption></figure>
-          <figure><div class="ph" data-img="table/czar-homes-desk" data-art="table" data-alt="Czar Homes in Sylph, on the coffee table" data-sizes="(max-width: 640px) 92vw, 380px" data-st><img src="assets/table/czar-homes-desk.webp" srcset="assets/table/czar-homes-desk-s.webp 560w, assets/table/czar-homes-desk-m.webp 820w, assets/table/czar-homes-desk.webp 1080w" sizes="(max-width: 640px) 92vw, 380px" alt="Czar Homes in Sylph, on the coffee table" loading="lazy" decoding="async" onerror="this.remove()"></div><figcaption>Czar Homes in Sylph, on the coffee table.</figcaption></figure>
-          <figure><div class="ph" data-img="table/argmac-hardcopy" data-art="table" data-alt="Argmac in Sylph, on the dining table" data-sizes="(max-width: 640px) 92vw, 380px" data-st><img src="assets/table/argmac-hardcopy.webp" srcset="assets/table/argmac-hardcopy-s.webp 560w, assets/table/argmac-hardcopy-m.webp 820w, assets/table/argmac-hardcopy.webp 1080w" sizes="(max-width: 640px) 92vw, 380px" alt="Argmac in Sylph, on the dining table" loading="lazy" decoding="async" onerror="this.remove()"></div><figcaption>Argmac in Sylph, on the dining table.</figcaption></figure>
+          <figure><div class="ph" data-img="table/sylph-editions" data-art="table" data-alt="Recent Sylph editions spread out on a table" data-sizes="(max-width: 640px) 92vw, 380px" data-st><img src="assets/table/sylph-editions.webp" srcset="assets/table/sylph-editions-s.webp 560w, assets/table/sylph-editions-m.webp 820w, assets/table/sylph-editions.webp 1080w" sizes="(max-width: 640px) 92vw, 380px" alt="Recent Sylph editions spread out on a table" loading="lazy" decoding="async" onerror="this.remove()"></div><figcaption>Recent Sylph editions, laid out.</figcaption></figure>
+          <figure><div class="ph" data-img="table/reading-sylph" data-art="table" data-alt="A reader with Sylph at home" data-sizes="(max-width: 640px) 92vw, 380px" data-st><img src="assets/table/reading-sylph.webp" srcset="assets/table/reading-sylph-s.webp 560w, assets/table/reading-sylph-m.webp 820w, assets/table/reading-sylph.webp 1080w" sizes="(max-width: 640px) 92vw, 380px" alt="A reader with Sylph at home" loading="lazy" decoding="async" onerror="this.remove()"></div><figcaption>Sylph, read at home.</figcaption></figure>
+          <figure><div class="ph" data-img="table/beyond-designs-interview" data-art="table" data-alt="Sylph editions with Beyond Designs on the cover, open at Sachin and Neha Gupta&rsquo;s interview" data-sizes="(max-width: 640px) 92vw, 380px" data-st><img src="assets/table/beyond-designs-interview.webp" srcset="assets/table/beyond-designs-interview-s.webp 560w, assets/table/beyond-designs-interview-m.webp 820w, assets/table/beyond-designs-interview.webp 1080w" sizes="(max-width: 640px) 92vw, 380px" alt="Sylph editions with Beyond Designs on the cover, open at Sachin and Neha Gupta&rsquo;s interview" loading="lazy" decoding="async" onerror="this.remove()"></div><figcaption>Beyond Designs in Sylph, with Sachin and Neha Gupta&rsquo;s interview.</figcaption></figure>
         </div>
       </div>
-      <blockquote class="quote" data-reveal>&ldquo;Having our work published with an editor&rsquo;s voice gave our firm the exact third-person authority we needed to close our largest UHNI project to date.&rdquo;<cite>A Sylph client</cite></blockquote>
+      <blockquote class="quote" data-reveal>&ldquo;Being published in Sylph gave us the instant credibility we needed. It directly helped us close our largest luxury farmhouse specification to date.&rdquo;<cite>Director, Lumiere by Imperial</cite></blockquote>
       <div class="revs" data-reviews id="reviews"><div class="revs-in" data-revs></div></div>
       <div class="ctaw mt"><a class="cta" data-cta="work" href="eligibility/?type=brand"><span class="tx"><span class="t" data-oneline>Check my brand&rsquo;s eligibility</span><span class="m" data-oneline>Free 2-minute check &middot; See your fixed price</span></span><span class="ar" aria-hidden="true">&#8599;</span></a><p class="slots" data-slots></p></div>
     </div>
@@ -473,17 +475,16 @@ section.soft{background:var(--soft)}
 
   <section class="sec ben dark">
     <div class="wrap grid">
-      <div class="ph" data-img="brands/mia-cara-vase" data-art="lamp" data-alt="Mia Cara decor in Sylph" data-sizes="(max-width: 900px) 100vw, 480px" data-reveal data-st><img src="assets/brands/mia-cara-vase.webp" srcset="assets/brands/mia-cara-vase-s.webp 560w, assets/brands/mia-cara-vase-m.webp 820w, assets/brands/mia-cara-vase.webp 1080w" sizes="(max-width: 900px) 100vw, 480px" alt="Mia Cara decor in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div>
+      <div class="ph" data-img="brands/feature-interior" data-art="lamp" data-alt="An interior with a Pichwai painting, brass candelabras and antiques, in Sylph" data-sizes="(max-width: 900px) 100vw, 480px" data-reveal data-st><img src="assets/brands/feature-interior.webp" srcset="assets/brands/feature-interior-s.webp 560w, assets/brands/feature-interior-m.webp 820w, assets/brands/feature-interior.webp 1080w" sizes="(max-width: 900px) 100vw, 480px" alt="An interior with a Pichwai painting, brass candelabras and antiques, in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div>
       <div data-reveal>
         <h2>What a Sylph Feature Does for Your&nbsp;Brand</h2>
         <ol>
-          <li><div><b>Brand equity</b><span>Sylph&rsquo;s reputation beside yours reinforces your premium positioning. Your price reads as craft, not&nbsp;cost.</span></div></li>
-          <li><div><b>Audience access</b><span>60,000 to 70,000 copies a year, hand-delivered to UHNI and HNI homes. Read by more than 80,000 UHNIs and HNIs, and by the architects, designers and developers who specify for&nbsp;them.</span></div></li>
-          <li><div><b>Visual storytelling</b><span>Our editors write about your pieces in context: material, making, scale and finish. More than a product listing can ever show. You don&rsquo;t write a&nbsp;word.</span></div></li>
-          <li><div><b>Sales enablement</b><span>A credential for showroom conversations, trade presentations and proposals to design studios: &ldquo;As featured in&nbsp;Sylph&rdquo;.</span></div></li>
-          <li><div><b>A marketing asset you keep</b><span>Where your agreement allows, use the feature in catalogues, PR and your own channels. Cover placements also get a feature on Sylph&rsquo;s Instagram, with more than 3 million views a&nbsp;month.</span></div></li>
-          <li><div><b>Or a book of your own</b><span>Sylph Consultancy&rsquo;s Legacy Book&trade; series makes single-brand coffee table books. Or a custom Sylph edition built around your brand, like Kathgodown&rsquo;s 116-page Collector&rsquo;s Edition. Custom editions are printed in a run of 1,000+ copies for your own&nbsp;clients.</span></div></li>
-          <li><div><b>One price. No agent.</b><span>A fixed price, shown upfront. No haggling. No commission on&nbsp;top.</span></div></li>
+          <li><div><b>Brand equity</b><span>Sylph&rsquo;s editorial authority lifts your positioning from day one. Buyers stop questioning your price tag and start seeing your&nbsp;craft.</span></div></li>
+          <li><div><b>Unrivalled dual distribution</b><span>75,000+ hard copies a year, hand-delivered to UHNI and HNI residences, plus a digital edition reaching 4,50,000+ affluent readers, principal architects and interior designers who specify for high-end&nbsp;projects.</span></div></li>
+          <li><div><b>Editorial storytelling</b><span>Our editors tell your story in depth, highlighting material, craftsmanship, scale and finish in a way no catalogue or ad ever could. You don&rsquo;t write a&nbsp;word.</span></div></li>
+          <li><div><b>Sales enablement</b><span>A credential for client walk-ins, trade pitches and studio proposals. &ldquo;As featured in Sylph&rdquo; on your pitch changes the whole&nbsp;conversation.</span></div></li>
+          <li><div><b>A permanent marketing asset</b><span>Use your feature across catalogues, showroom displays, PR and digital channels. Select cover placements also get a dedicated spotlight on Sylph&rsquo;s Instagram, with 3 million+ views a&nbsp;month.</span></div></li>
+          <li><div><b>Or a collector&rsquo;s book of your own</b><span>Through Sylph Consultancy&rsquo;s Legacy Book&trade; series, we craft bespoke single-brand coffee table books, or custom Sylph editions dedicated to your house, like Kathgodown&rsquo;s 116-page Collector&rsquo;s Edition. Printed in runs of 1,000+ copies for your VIP clients and flagship&nbsp;showrooms.</span></div></li>
         </ol>
         <div class="ctaw"><a class="cta" data-cta="benefits" href="eligibility/?type=brand"><span class="tx"><span class="t" data-oneline>Check my brand&rsquo;s eligibility</span><span class="m" data-oneline>Free 2-minute check &middot; See your fixed price</span></span><span class="ar" aria-hidden="true">&#8599;</span></a><p class="slots" data-slots></p></div>
       </div>
@@ -492,11 +493,11 @@ section.soft{background:var(--soft)}
 
   <section class="sec" style="background:var(--soft)">
     <div class="wrap">
-      <div class="head center" data-reveal><h2>Why the Best Brands Pay to Be in&nbsp;Sylph</h2><p class="intro">Not for one order. For what every buyer believes about their price, from then&nbsp;on.</p></div>
+      <div class="head center" data-reveal><h2>Why the Best Brands Pay to Be in&nbsp;Sylph</h2><p class="intro">Not for a single order. For what every buyer believes about your price, from then&nbsp;on.</p></div>
       <div class="why" data-reveal>
-        <div class="tile" style="--c:var(--emerald)"><small>01</small><h3>Premium positioning</h3><p>Sylph&rsquo;s name beside yours tells buyers your price is about craft. A premium price stops looking expensive, and starts looking&nbsp;right.</p></div>
-        <div class="tile" style="--c:var(--sapphire)"><small>02</small><h3>A credential that sells</h3><p>&ldquo;As featured in Sylph&rdquo; in your showroom, your catalogue and every trade presentation to a design&nbsp;studio.</p></div>
-        <div class="tile cut"><small>03</small><h3>Proof, even without a lead</h3><p>Even when an order doesn&rsquo;t come straight from the page, you can say Sylph has featured your brand. To every buyer, from then&nbsp;on.</p></div>
+        <div class="tile" style="--c:var(--emerald)"><small>01</small><h3>Premium positioning</h3><p>Sylph&rsquo;s endorsement, beside the industry&rsquo;s top names, tells buyers your price is about craft, not cost. A premium price stops looking expensive and starts looking&nbsp;right.</p></div>
+        <div class="tile" style="--c:var(--sapphire)"><small>02</small><h3>A credential that sells</h3><p>Drop &ldquo;As featured in Sylph&rdquo; into showroom conversations, printed catalogues and every high-stakes proposal you present to a design&nbsp;studio.</p></div>
+        <div class="tile cut"><small>03</small><h3>Proof, long after the page turns</h3><p>Even if a specification doesn&rsquo;t close on day one, Sylph&rsquo;s endorsement changes every conversation that follows. To every luxury buyer and architect, you are no longer just another vendor. You are a vetted industry&nbsp;leader.</p></div>
       </div>
       <p class="mathnote" data-reveal>Six decades in, <b>Lumiere by Imperial</b> still took the cover. <b>Kathgodown</b> built a 116-page Collector&rsquo;s Edition with&nbsp;Sylph.</p>
       <div class="ctaw mt"><a class="cta" data-cta="why" href="eligibility/?type=brand"><span class="tx"><span class="t" data-oneline>Check my brand&rsquo;s eligibility</span><span class="m" data-oneline>Free 2-minute check &middot; See your fixed price</span></span><span class="ar" aria-hidden="true">&#8599;</span></a><p class="slots" data-slots></p></div>
@@ -549,11 +550,11 @@ section.soft{background:var(--soft)}
 
   <section class="sec soft" data-names-sec>
     <div class="wrap center">
-      <h2 data-reveal>The Company You&rsquo;ll&nbsp;Keep</h2>
-      <div data-names-wrap><p class="names-lead">Brands Sylph has featured include</p><p class="names" data-names="brands"></p></div>
-      <div data-names-wrap><p class="names-lead">On the same pages as designers like</p><p class="names" data-names="studios"></p></div>
+      <h2 data-reveal>In Good Company</h2>
+      <div data-names-wrap><p class="names-lead">Brands &amp; design houses featured in Sylph</p><p class="names" data-names="brands"></p></div>
+      <div data-names-wrap><p class="names-lead">On the same pages as the architects &amp; designers who specify</p><p class="names" data-names="studios"></p></div>
       <div class="strip4">
-        <div class="ph" data-img="covers/isha-arora" data-art="table" data-alt="Isha Arora on the cover of Sylph" data-st><img src="assets/covers/isha-arora.webp" srcset="assets/covers/isha-arora-s.webp 560w, assets/covers/isha-arora-m.webp 820w, assets/covers/isha-arora.webp 1080w" sizes="(max-width: 640px) 50vw, 320px" alt="Isha Arora on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="people/muselab" data-art="arch" data-alt="Huzefa Rangwala and Jasem Pirani of MuseLAB in Sylph" data-st><img src="assets/people/muselab.webp" srcset="assets/people/muselab-s.webp 560w, assets/people/muselab-m.webp 820w, assets/people/muselab.webp 1080w" sizes="(max-width: 640px) 50vw, 320px" alt="Huzefa Rangwala and Jasem Pirani of MuseLAB in Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="covers/mad" data-art="lamp" data-alt="Naitik Parekh of M.A.D Collaborative on the cover of Sylph" data-st><img src="assets/covers/mad.webp" srcset="assets/covers/mad-s.webp 560w, assets/covers/mad-m.webp 820w, assets/covers/mad.webp 1080w" sizes="(max-width: 640px) 50vw, 320px" alt="Naitik Parekh of M.A.D Collaborative on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="covers/envisage" data-art="window" data-alt="Meena Murthy Kakkar and Vishal Kakkar of Envisage on the cover of Sylph" data-st><img src="assets/covers/envisage.webp" srcset="assets/covers/envisage-s.webp 560w, assets/covers/envisage-m.webp 820w, assets/covers/envisage.webp 1080w" sizes="(max-width: 640px) 50vw, 320px" alt="Meena Murthy Kakkar and Vishal Kakkar of Envisage on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div>
+        <div class="ph" data-img="covers/isha-arora" data-art="table" data-alt="Isha Arora on the cover of Sylph" data-st><img src="assets/covers/isha-arora.webp" srcset="assets/covers/isha-arora-s.webp 560w, assets/covers/isha-arora-m.webp 820w, assets/covers/isha-arora.webp 1080w" sizes="(max-width: 640px) 50vw, 320px" alt="Isha Arora on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="covers/artu" data-art="arch" data-alt="Bhavya Upadhyay of ARTU on the cover of Sylph" data-st><img src="assets/covers/artu.webp" srcset="assets/covers/artu-s.webp 560w, assets/covers/artu-m.webp 820w, assets/covers/artu.webp 1080w" sizes="(max-width: 640px) 50vw, 320px" alt="Bhavya Upadhyay of ARTU on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="covers/mad" data-art="lamp" data-alt="Naitik Parekh of M.A.D Collaborative on the cover of Sylph" data-st><img src="assets/covers/mad.webp" srcset="assets/covers/mad-s.webp 560w, assets/covers/mad-m.webp 820w, assets/covers/mad.webp 1080w" sizes="(max-width: 640px) 50vw, 320px" alt="Naitik Parekh of M.A.D Collaborative on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="ph" data-img="covers/envisage" data-art="window" data-alt="Meena Murthy Kakkar and Vishal Kakkar of Envisage on the cover of Sylph" data-st><img src="assets/covers/envisage.webp" srcset="assets/covers/envisage-s.webp 560w, assets/covers/envisage-m.webp 820w, assets/covers/envisage.webp 1080w" sizes="(max-width: 640px) 50vw, 320px" alt="Meena Murthy Kakkar and Vishal Kakkar of Envisage on the cover of Sylph" loading="lazy" decoding="async" onerror="this.remove()"></div>
       </div>
       <div class="ctaw mt"><a class="cta" data-cta="featured" href="eligibility/?type=brand"><span class="tx"><span class="t" data-oneline>Check my brand&rsquo;s eligibility</span><span class="m" data-oneline>Free 2-minute check &middot; See your fixed price</span></span><span class="ar" aria-hidden="true">&#8599;</span></a><p class="slots" data-slots></p></div>
     </div>
@@ -588,7 +589,7 @@ section.soft{background:var(--soft)}
           <div class="yes" style="--c:var(--emerald)"><h3>Sylph is for you if</h3><ul><li>You make furniture, lighting, decor or surfaces at a premium price</li><li>You sell through architects and designers, or want to</li><li>You have a finished collection and good photographs</li><li>You want your brand known by name, not by discount</li></ul></div>
           <div class="no" style="--c:var(--oxblood)"><h3>Sylph is not for you if</h3><ul><li>You compete on the lowest price</li><li>You want one page to fill the order book by next week</li><li>You like to haggle. Every placement has one fixed price</li><li>Your range is mass-market. Sylph&rsquo;s editors only feature luxury work</li></ul></div>
         </div>
-        <div class="ctaw mt"><a class="cta" data-cta="fit" href="eligibility/?type=brand"><span class="tx"><span class="t" data-oneline>Check my brand&rsquo;s eligibility</span><span class="m" data-oneline>Free 2-minute check &middot; See your fixed price</span></span><span class="ar" aria-hidden="true">&#8599;</span></a><p class="slots" data-slots></p></div>
+        <div class="ctaw mt"><a class="cta" data-cta="fit" href="eligibility/?type=brand"><span class="tx"><span class="t" data-oneline>Check my brand&rsquo;s eligibility</span><span class="m" data-oneline>Free 2-minute check &middot; See your fixed price</span></span><span class="ar" aria-hidden="true">&#8599;</span></a><p class="slots">Limited pages per edition. Strictly curated.</p></div>
       </div>
     </div>
   </section>
@@ -598,7 +599,7 @@ section.soft{background:var(--soft)}
       <div class="head center"><h2>Questions Brands Ask Before They&nbsp;Check</h2></div>
       <div class="faq">
         <details><summary>Is a feature an advert?</summary><div class="a"><p>No. It&rsquo;s an article. Sylph&rsquo;s editors write it about your pieces, your craft and your story. Want an advert as well? Ask on the call.</p></div></details>
-        <details><summary>Who actually gets the magazine?</summary><div class="a"><p>UHNI and HNI homes on Sylph&rsquo;s own list, and boardrooms, embassies and estates. 60,000 to 70,000 copies a year, across four editions a month, read by more than 80,000 UHNIs and HNIs. Every edition also features the architects and designers who work on those homes.</p></div></details>
+        <details><summary>Who actually gets the magazine?</summary><div class="a"><p>UHNI and HNI homes on Sylph&rsquo;s own list, and boardrooms, embassies and estates. 75,000+ copies a year, across four editions a month, read by more than 1,60,000 UHNIs and HNIs. Every edition also features the architects and designers who work on those homes.</p></div></details>
         <details><summary>How much does it cost?</summary><div class="a"><p>Every placement has one fixed price, from a quarter page to a full year. You see yours at the end of the check. No haggling, no agent.</p></div></details>
         <details><summary>What do I need to send?</summary><div class="a"><p>Photos of your pieces and a few lines about the collection and your brand. No photos yet? Say so in the check.</p></div></details>
         <details><summary>Do I have to write it?</summary><div class="a"><p>No. Send the material. Sylph&rsquo;s editors write it and take it all the way to print.</p></div></details>
@@ -614,11 +615,11 @@ section.soft{background:var(--soft)}
   <section class="final dark">
     <div class="wrap" data-reveal>
       <h2>Be the Brand the Architect Already&nbsp;Knows.</h2>
-      <p class="intro">Two minutes. See where your brand fits, and the fixed price. No call needed for smaller placements.</p>
-      <div class="ctaw"><a class="cta" data-cta="final" href="eligibility/?type=brand"><span class="tx"><span class="t" data-oneline>Check my brand&rsquo;s eligibility</span><span class="m" data-oneline>Free 2-minute check &middot; See your fixed price</span></span><span class="ar" aria-hidden="true">&#8599;</span></a><p class="slots" data-slots></p></div>
+      <p class="intro">Two minutes to check your brand&rsquo;s fit and see transparent, fixed-tier investment options. Select placements need no consultation.</p>
+      <div class="ctaw"><a class="cta" data-cta="final" href="eligibility/?type=brand"><span class="tx"><span class="t" data-oneline>Check my brand&rsquo;s eligibility</span><span class="m" data-oneline>Two-minute assessment &middot; Transparent tier pricing</span></span><span class="ar" aria-hidden="true">&#8599;</span></a><p class="slots">Editorial pages are strictly capped per volume. Once they close, your brand waits for the next edition.</p></div>
       <div class="ps">
-        <p><b>P.S.</b> Somewhere this month, an architect will pick the lights, the sofas and the rugs for a very big home. The only question is whether they have seen your brand.</p>
-        <p><b>P.P.S.</b> Every edition has a fixed number of pages, and places go first come, first served. The earlier you check, the sooner you run.</p>
+        <p><b>P.S.</b> This month, a principal architect will specify the lighting, seating and textiles for a landmark private residence. The only question is whether your house is already on their table.</p>
+        <p><b>P.P.S.</b> Each volume carries a fixed allocation of spreads, curated strictly in order of qualification. The earlier you check, the sooner your brand enters the current cycle.</p>
       </div>
     </div>
   </section>
@@ -626,8 +627,8 @@ section.soft{background:var(--soft)}
 
 <footer class="foot">
   <div class="wrap">
-    <div class="logo" data-logo>SYLPH</div>
-    <p>For the 1%. A 400-page coffee-table magazine on the people who design, build and furnish India&rsquo;s finest homes. Four editions a month, hand-delivered to UHNI and HNI homes.</p>
+    <div class="logo" data-logo>SYLPH CONSULTANCY</div>
+    <p>For the 1%. A monumental 400-page collector&rsquo;s coffee table book on the design houses defining this decade. Museum-grade print and binding turn your work from a commercial product into a collectible piece of design history.</p>
     <nav><a data-link="privacy" href="#">Privacy</a><a data-link="terms" href="#">Terms</a></nav>
     <p>&copy; 2026 Sylph Creatives Magazine. Coffee table books and custom editions by Sylph Consultancy.</p>
   </div>
@@ -687,8 +688,8 @@ const CONFIG = {
   // Other names Sylph has featured. Prerna confirms each one. An empty list hides its line.
   featured: {
     studiosMore: ['Bobby Mukherji', 'Manit and Sonali Rastogi of Morphogenesis', 'Habitat Architects', 'Sachin Gupta of Beyond Designs', 'Seetu Kohli', 'Aparna Kaushik', 'Anjali Goel and Kashish Raheja of ANCA', 'Hardesh and Monica Chawla of Essentia', 'Simran Boparai and Dilsher Sandhu', 'Ali Baldiwala', 'Karan Sethi of Qube Designs', 'Shruti Sodhi', 'Chirag Swain of Chirag Design Studio', 'Amita Trehan of Bravura Spaces', 'Kavita Trivedi Studio'],
-    studios: ['Morphogenesis', 'Bobby Mukherji', 'Habitat Architects', 'Essentia', 'KDA', 'MuseLAB', 'M.A.D Collaborative', 'Magic Houz', 'Yellow Arch Studio', 'Design Net', 'ANCA', 'Isha Arora Designs', 'Inventarchitects', 'The Design Unit', 'Aparna Kaushik', 'Varun Garg Architects', 'Envisage', 'Gayatri Bedi Designs', 'IndiHaus Design', 'Navya And A Quarter', 'Paper Floors', 'Pavaki Sapra Designs'],
-    brands: ['Sarita Handa', 'Kathgodown', 'Progetto', 'Lumiere by Imperial', 'Argmac Custom', 'Triveni The Granite Studio', 'JB Marble Decor', 'Mia Cara', 'D’Vinity', 'Outdoor Connections', 'Art N Vintage', 'Vanbros India', 'Czar Homes'],
+    studios: ['Beyond Designs', 'Morphogenesis', 'Studio Lotus', 'Bobby Mukherji', 'Ashiesh Shah', 'Simran Boparai', 'Essentia Environments', 'K2India', 'ZZ Architects', 'Habitat Architects', 'Aparna Kaushik', 'MuseLAB', 'ANCA', 'KDA', 'M.A.D Collaborative', 'Magic Houz', 'Yellow Arch Studio', 'Design Net', 'Isha Arora Designs', 'Inventarchitects', 'The Design Unit', 'Varun Garg Architects', 'Envisage', 'Gayatri Bedi Designs', 'IndiHaus Design', 'Navya And A Quarter', 'Paper Floors', 'Pavaki Sapra Designs'],
+    brands: ['Ralph Lauren Home', 'Fendi Casa', 'Minotti', 'Poltrona Frau', 'Baccarat', 'Essentia Home', 'Beyond Designs', 'Nivasa', 'Idus', 'Diviana', 'Sarita Handa', 'Kathgodown', 'The White Teak Company', 'Lumiere by Imperial', 'Progetto', 'Argmac Custom', 'Triveni The Granite Studio', 'JB Marble Decor', 'Mia Cara', 'D’Vinity', 'Outdoor Connections', 'Art N Vintage', 'Vanbros India', 'Czar Homes'],
     developers: []
   },
   // Real reviews only, with the person's permission. Review blocks stay hidden until one is added. Format:
@@ -955,7 +956,7 @@ const PAGE = { type: 'brand', name: 'lp-brands-hybrid' };
     let h = '<span class="dot" aria-hidden="true"></span>';
     if (hasN) h += '<span>Only <b>' + sLeft + ' of ' + sTotal + '</b> ' + esc(SL.what || 'pages') + ' left in ' + ed + (close ? '. Closes <b>' + longDate(close) + '</b>' : '') + '.</span><span class="meter" aria-hidden="true"><i style="width:' + Math.round((sTotal - sLeft) / sTotal * 100) + '%"></i></span>';
     else if (close) h += '<span>Pages in every edition are limited. <b>' + Ed + ' closes on ' + longDate(close) + '.</b></span>';
-    else h += '<span>Pages in every edition are limited. <b>Once they are gone, you wait for the next one.</b></span>';
+    else h += '<span>Pages in every edition are strictly limited. <b>Once they&rsquo;re claimed, the door closes until the next release.</b></span>';
     el.innerHTML = h;
   });
   $$('[data-slots-short]').forEach(el => { if (hasN) el.innerHTML = 'Only <b>' + sLeft + ' of ' + sTotal + '</b> ' + esc(SL.what || 'pages') + ' left'; });
@@ -1164,6 +1165,11 @@ const PAGE = { type: 'brand', name: 'lp-brands-hybrid' };
 }();
 </script>
 <!-- ============ END PROOF TICKER ============ -->
+
+<script>(function(){var c=document.querySelector('.covers'),m=c&&c.querySelector('.mid');
+if(!c||!m)return;function f(){if(c.scrollWidth>c.clientWidth)
+c.scrollLeft=m.offsetLeft-(c.clientWidth-m.clientWidth)/2;}f();
+window.addEventListener('load',f);})();</script>
 
 </body>
 </html>
